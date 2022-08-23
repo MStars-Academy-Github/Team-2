@@ -1,5 +1,6 @@
 import Navbar from "./navbar";
 import Footer from "./footer";
+import InfoPanel from "./InfoPanel";
 import { ChildContextProvider, PropsWithChildren } from "react";
 
 export default function Layout({ children }: PropsWithChildren) {
@@ -17,6 +18,7 @@ export default function Layout({ children }: PropsWithChildren) {
       <Navbar />
       <main>{children}</main>
       <Footer />
+      <InfoPanel />
     </div>
   );
 }
