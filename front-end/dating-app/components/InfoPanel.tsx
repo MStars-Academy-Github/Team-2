@@ -8,6 +8,7 @@ export default function InfoPanel({}: Props) {
       FrontEnd by{" "}
       <a
         href="https://github.com/MunkhtamirG"
+        target="/blank"
         style={{ color: "ActiveCaption" }}
       >
         Ozy
@@ -16,7 +17,11 @@ export default function InfoPanel({}: Props) {
       <span style={{ marginLeft: "20px" }}>
         {" "}
         BackEnd by{" "}
-        <a href="" style={{ color: "ActiveCaption" }}>
+        <a
+          href="https://github.com/odko19"
+          style={{ color: "ActiveCaption" }}
+          target="/blank"
+        >
           Odko
         </a>{" "}
         &#169;
