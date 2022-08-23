@@ -7,6 +7,7 @@ dotenv.config();
 const app: Express = express();
 const PORT = process.env.PORT;
 const DB_CONNECTION = process.env.ATLAS_MONGO_CONNECTION || "";
+
 app.use(express.json());
 app.use("/users", routes);
 
