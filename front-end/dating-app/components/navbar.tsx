@@ -10,10 +10,13 @@ export default function Navbar() {
     window.localStorage.removeItem("user");
   }
   return (
-    <Box sx={{ flexGrow: 1, width: "100vw" }}>
+    <Box sx={{ flexGrow: 1, width: "100vw" }} style={{}}>
       <AppBar
         position="static"
-        style={{ backgroundColor: "rgba(0, 0, 255, 0.2)", color: "white" }}
+        style={{
+          backgroundColor: "rgba(0, 0, 0, 0.4)",
+          color: "white",
+        }}
       >
         <Toolbar>
           <Typography

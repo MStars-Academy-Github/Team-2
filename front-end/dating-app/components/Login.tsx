@@ -33,9 +33,7 @@ export default function Login({}: Props) {
     }
   }
   return (
-    <>
-      <ParticlesBackground />
-
+    <div style={{ backgroundColor: "#F29EC0" }}>
       {register == false ? (
         <div
           style={{
@@ -333,6 +331,6 @@ export default function Login({}: Props) {
           </Box>
         </div>
       )}
-    </>
+    </div>
   );
 }

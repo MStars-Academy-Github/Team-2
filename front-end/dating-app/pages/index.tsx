@@ -21,7 +21,33 @@ const Home: NextPage = () => {
         />
       </Head>
 
-      <main></main>
+      <main>
+        <div
+          style={{
+            backgroundColor: "rgba(0, 0, 0,  0.1)",
+            width: "600px",
+            height: "450px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <div>
+            <img src="" alt="" />
+          </div>
+          <div style={{ color: "black" }}>
+            <p>
+              <span>FirstName</span>
+              <span>LastName</span>
+            </p>
+            <p>Age</p>
+            <p>Sex</p>
+            <p>Sex</p>
+            <p>Hobby</p>
+          </div>
+        </div>
+      </main>
     </div>
   );
 };

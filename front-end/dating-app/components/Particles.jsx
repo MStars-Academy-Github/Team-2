@@ -9,7 +9,7 @@ export default function ParticlesBackground() {
       width="100vw"
       height="100vh"
       style={{
-        backgroundColor: "#F29EC0",
+        background: "linear-gradient(to bottom, #8a2387, #e94057, #f27121)",
         position: "fixed",
         zIndex: "-1",
         top: 0,

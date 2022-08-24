@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               src="https://my.spline.design/hands3duicopy-cd01dc26cd895fefc94394c2cf7c3612/"
             ></iframe>
           </div>
-          <ParticlesBackground />
+          {/* <ParticlesBackground /> */}
           <Login />
         </div>
       )}
