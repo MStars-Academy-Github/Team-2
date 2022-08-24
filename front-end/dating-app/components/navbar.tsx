@@ -6,8 +6,10 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
 export default function Navbar() {
-  function logoutHandler() {
+  function logoutHandler(e: any) {
+    e.preventDefault();
     window.localStorage.removeItem("user");
+    window.location.reload();
   }
   return (
     <Box sx={{ flexGrow: 1, width: "100vw" }} style={{}}>

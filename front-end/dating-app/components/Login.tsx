@@ -1,8 +1,7 @@
 import { Box, Button, Collapse, IconButton, TextField } from "@mui/material";
 import React, { useState } from "react";
-import ParticlesBackground from "./Particles";
 import CloseIcon from "@mui/icons-material/Close";
-
+import axios from "axios";
 import Alert from "@mui/material/Alert";
 
 type Props = {};
@@ -12,13 +11,24 @@ export default function Login({}: Props) {
   const [open, setOpen] = React.useState(false);
   const [openSuccess, setOpenSuccess] = React.useState(false);
   function loginHandler(e: any) {
-    window.localStorage.setItem(
-      "user",
-      JSON.stringify({
+    e.preventDefault();
+    axios
+      .post("http://localhost:3001/users/login", {
         email: e.target.email.value,
         password: e.target.password.value,
       })
-    );
+      .then((res) => {
+        console.log(res);
+        if (res.status == 200) {
+          window.localStorage.setItem("user", JSON.stringify(res.data));
+          window.location.reload();
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          console.error(err);
+        }
+      });
   }
   function registerHandler() {
     setRegister(true);
@@ -26,8 +36,28 @@ export default function Login({}: Props) {
   function signUpHandler(e: any) {
     e.preventDefault();
     if (e.target.password.value === e.target.passwordAgain.value) {
-      setRegister(false);
-      setOpenSuccess(true);
+      axios
+        .post("http://localhost:3001/users/register", {
+          email: e.target.email.value,
+          password: e.target.password.value,
+          firstName: e.target.firstName.value,
+          lastName: e.target.lastName.value,
+          imgUrl: e.target.imgUrl.value,
+          age: e.target.age.value,
+          sex: e.target.sex.value,
+          hobby: e.target.hobby.value,
+        })
+        .then((res) => {
+          if (res.status == 200) {
+            setOpenSuccess(true);
+            setRegister(false);
+          }
+        })
+        .catch((err) => {
+          if (err) {
+            console.error(err);
+          }
+        });
     } else {
       setOpen(true);
     }
@@ -243,6 +273,7 @@ export default function Login({}: Props) {
                 name="firstName"
                 variant="filled"
                 color="success"
+                required
               ></TextField>
               <TextField
                 label="Last Name"
@@ -250,6 +281,7 @@ export default function Login({}: Props) {
                 name="lastName"
                 variant="filled"
                 color="success"
+                required
               ></TextField>
               <TextField
                 label="Email"
@@ -257,6 +289,17 @@ export default function Login({}: Props) {
                 name="email"
                 variant="filled"
                 color="error"
+                type="email"
+                required
+              ></TextField>
+              <TextField
+                label="Image URL"
+                className="mb-[10px] "
+                name="imgUrl"
+                variant="filled"
+                color="error"
+                type="url"
+                required
               ></TextField>
               <TextField
                 label="Age"
@@ -265,6 +308,7 @@ export default function Login({}: Props) {
                 name="age"
                 variant="filled"
                 color="error"
+                required
               ></TextField>
               <TextField
                 label="Sex"
@@ -272,6 +316,7 @@ export default function Login({}: Props) {
                 name="sex"
                 variant="filled"
                 color="error"
+                required
               ></TextField>
               <TextField
                 label="Hobby"
@@ -279,6 +324,7 @@ export default function Login({}: Props) {
                 name="hobby"
                 variant="filled"
                 color="error"
+                required
               ></TextField>
               <TextField
                 label="Password"
@@ -287,6 +333,7 @@ export default function Login({}: Props) {
                 name="password"
                 variant="filled"
                 color="error"
+                required
               ></TextField>
               <TextField
                 label="Password Again"
@@ -295,6 +342,7 @@ export default function Login({}: Props) {
                 name="passwordAgain"
                 variant="filled"
                 color="error"
+                required
               ></TextField>
               <Box sx={{ width: "100%" }}>
                 <Collapse in={open}>
