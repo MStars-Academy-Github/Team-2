@@ -5,8 +5,10 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { useRouter } from "next/router";
 
 export default function Navbar() {
+  const router = useRouter();
   const [user, setUser] = React.useState<any>();
   React.useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("user") || "user"));
@@ -29,6 +31,9 @@ export default function Navbar() {
           <Typography
             variant="h6"
             component="div"
+            onClick={() => {
+              router.push("/");
+            }}
             sx={{
               flexGrow: 1,
               textAlign: "center",
