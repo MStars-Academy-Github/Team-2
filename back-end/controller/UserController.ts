@@ -192,7 +192,7 @@ const editUser = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-/* ----------------------- USER UPDATE ------------------------ */
+/* ----------------------- USER DELETE ------------------------ */
 const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
   const userParamsId = req.query.id || "userId";
   if (userParamsId.length === 0) {
