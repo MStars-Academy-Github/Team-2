@@ -12,6 +12,8 @@ export default function ParticlesBackground() {
         backgroundColor: "#F29EC0",
         position: "fixed",
         zIndex: "-1",
+        top: 0,
+        left: 0,
       }}
       params={{
         particles: {

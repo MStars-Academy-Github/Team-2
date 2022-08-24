@@ -4,32 +4,35 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 
 export default function Navbar() {
+  function logoutHandler() {
+    window.localStorage.removeItem("user");
+  }
   return (
     <Box sx={{ flexGrow: 1, width: "100vw" }}>
-      <AppBar position="static">
+      <AppBar
+        position="static"
+        style={{ backgroundColor: "rgba(0, 0, 255, 0.2)", color: "white" }}
+      >
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, textAlign: "center" }}
+            sx={{
+              flexGrow: 1,
+              textAlign: "center",
+              textShadow: "1px 1px black",
+              fontSize: "25px",
+              fontWeight: "900",
+            }}
           >
             Dating App
           </Typography>
-          <Button color="inherit">Login</Button>
-          <Button color="inherit">Register</Button>
+
+          <Button color="inherit" onClick={logoutHandler}>
+            Logout
+          </Button>
         </Toolbar>
       </AppBar>
     </Box>
