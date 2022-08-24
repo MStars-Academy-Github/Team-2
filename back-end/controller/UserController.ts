@@ -6,9 +6,32 @@ import bcrypt from "bcryptjs";
 const TOKEN_KEY = process.env.TOKEN_KEY || "password";
 
 /* ---------------------------- ALL USER ------------------------ */
-
 const getUsers = (req: Request, res: Response, next: NextFunction) => {
   Users.find({}, (err: Error, data: any) => {
+    if (err) {
+      return err;
+    }
+    res.json({
+      data: data,
+    });
+  });
+};
+
+/* ---------------------------- FEMALE USER ------------------------ */
+const getUsersFemale = (req: Request, res: Response, next: NextFunction) => {
+  Users.find({ sex: "female" }, (err: Error, data: any) => {
+    if (err) {
+      return err;
+    }
+    res.json({
+      data: data,
+    });
+  });
+};
+
+/* ---------------------------- MALE USER ------------------------ */
+const getUsersMale = (req: Request, res: Response, next: NextFunction) => {
+  Users.find({ sex: "male" }, (err: Error, data: any) => {
     if (err) {
       return err;
     }
@@ -111,7 +134,6 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
     /* -------- foundUser Type  ------- */
     const validPassword = foundUser[0].password || "not valid password";
     const validFirstName = foundUser[0].firstName || "not valid firstname";
-    const validId = foundUser[0]._id || "not valid firstname";
 
     /* ------- password decrypt  ------- */
     if (await bcrypt.compare(password, validPassword)) {
@@ -131,7 +153,7 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
         data: {
           email: email,
           // aldaa garch baigag harah
-          user_id: validId,
+          user: foundUser,
         },
         token: token,
       });
@@ -213,7 +235,7 @@ const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
           data: "user delete",
         },
       });
-    } else {
+    } else if (!foundUser) {
       res.status(401).json({
         success: false,
         data: {
@@ -231,40 +253,6 @@ export default {
   loginUser,
   editUser,
   deleteUser,
+  getUsersFemale,
+  getUsersMale,
 };
-
-// const createUser = async (req: Request, res: Response, next: NextFunction) => {
-//   const { firstName, lastName, imgURL, age, sex, hobby } = req.body;
-//   const foundUser = await Users.findOne({
-//     firstName: firstName,
-//     lastName: lastName,
-//   });
-//   if (foundUser) {
-//     res.json({
-//       success: false,
-//       data: "User already exits",
-//     });
-//   } else {
-//     const createdUser = await Users.create({
-//       firstName,
-//       lastName,
-//       imgURL,
-//       age,
-//       sex,
-//       hobby,
-//     });
-//     if (createdUser) {
-//       res.json({
-//         success: true,
-//         message: "User creation was succesful",
-//         data: createdUser,
-//       });
-//     } else {
-//       res.json({
-//         success: false,
-//         message: "User creation was unsuccesful",
-//         data: {},
-//       });
-//     }
-//   }
-// };
