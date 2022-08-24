@@ -208,7 +208,9 @@ const editUser = async (req: Request, res: Response, next: NextFunction) => {
     } else {
       res.status(401).json({
         success: false,
-        data: "Email or Id do not match",
+        data: {
+          data: "Id do not match",
+        },
       });
     }
   }
@@ -228,18 +230,18 @@ const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
       _id: userParamsId,
     });
 
-    if (foundUser.acknowledged === true) {
+    if (foundUser.deletedCount === 1) {
       res.status(200).json({
         success: true,
         data: {
           data: "user delete",
         },
       });
-    } else if (!foundUser) {
+    } else {
       res.status(401).json({
         success: false,
         data: {
-          data: "Email or Id do not match",
+          data: "Id do not match",
         },
       });
     }
