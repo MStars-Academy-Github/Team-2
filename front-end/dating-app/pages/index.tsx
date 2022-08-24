@@ -1,10 +1,43 @@
+import { useTheme } from "@emotion/react";
+import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
+import { Box, Button, MobileStepper, Paper, Typography } from "@mui/material";
+import axios from "axios";
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
-import ParticlesBackground from "../components/Particles";
+import { useEffect, useState } from "react";
 import styles from "../styles/Home.module.css";
+import SwipeableViews from "react-swipeable-views";
+import { autoPlay } from "react-swipeable-views-utils";
+
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const Home: NextPage = () => {
+  const theme = useTheme();
+  const [users, setUsers] = useState<any>();
+  const [activeStep, setActiveStep] = useState(0);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/users")
+      .then((res) => {
+        setUsers(res.data.data);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  const maxSteps = users?.length;
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleStepChange = (step: number) => {
+    setActiveStep(step);
+  };
+  console.log(users);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -26,26 +59,97 @@ const Home: NextPage = () => {
           style={{
             backgroundColor: "rgba(0, 0, 0,  0.1)",
             width: "600px",
-            height: "450px",
+            height: "460px",
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
             alignItems: "center",
           }}
         >
-          <div>
-            <img src="" alt="" />
-          </div>
-          <div style={{ color: "black" }}>
-            <p>
-              <span>FirstName</span>
-              <span>LastName</span>
-            </p>
-            <p>Age</p>
-            <p>Sex</p>
-            <p>Sex</p>
-            <p>Hobby</p>
-          </div>
+          <Box
+            sx={{
+              width: "100%",
+              minHeight: "100%",
+              flexGrow: 1,
+            }}
+          >
+            <Paper
+              square
+              elevation={0}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                height: 50,
+                pl: 2,
+                bgcolor: "background.default",
+              }}
+            ></Paper>
+            <AutoPlaySwipeableViews
+              // axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+              index={activeStep}
+              onChangeIndex={handleStepChange}
+              enableMouseEvents
+            >
+              {users?.map((user: any, index: any) => (
+                <div key={index}>
+                  {Math.abs(activeStep - index) <= 2 ? (
+                    <div
+                      style={{
+                        width: "100%",
+                        minHeight: "100%",
+                        display: "flex",
+                      }}
+                    >
+                      <Box
+                        component="img"
+                        sx={{
+                          maxHeight: "320px",
+                          minHeight: "370px",
+                          display: "flex",
+                          overflow: "hidden",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                        src={user.imgURL}
+                      />
+                      <div>
+                        <p>
+                          Name {user.firstName} {user.lastName}
+                        </p>
+                        <p>Age {user.age}</p>
+                        <p>Sex {user.sex}</p>
+                        <p>Hobby: {user.hobby}</p>
+                      </div>
+                    </div>
+                  ) : null}
+                </div>
+              ))}
+            </AutoPlaySwipeableViews>
+            <MobileStepper
+              steps={maxSteps}
+              position="static"
+              activeStep={activeStep}
+              nextButton={
+                <Button
+                  size="small"
+                  onClick={handleNext}
+                  disabled={activeStep === maxSteps - 1}
+                >
+                  Next
+                </Button>
+              }
+              backButton={
+                <Button
+                  size="small"
+                  onClick={handleBack}
+                  disabled={activeStep === 0}
+                >
+                  Back
+                </Button>
+              }
+            />
+          </Box>
         </div>
       </main>
     </div>
