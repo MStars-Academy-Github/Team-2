@@ -36,7 +36,6 @@ const Home: NextPage = () => {
   const handleStepChange = (step: number) => {
     setActiveStep(step);
   };
-  console.log(users);
 
   return (
     <div className={styles.container}>
