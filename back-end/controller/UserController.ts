@@ -1,20 +1,23 @@
 // CRUD
 import Users from "../model/users";
 import { NextFunction, Request, Response } from "express";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
+import userAllServices from "../services/userAllServices";
 const TOKEN_KEY = process.env.TOKEN_KEY || "password";
 
 /* ---------------------------- ALL USER ------------------------ */
 const getUsers = (req: Request, res: Response, next: NextFunction) => {
-  Users.find({}, (err: Error, data: any) => {
-    if (err) {
-      return err;
-    }
-    res.json({
-      data: data,
+  try {
+    Users.find({}, (err: Error, data: any) => {
+      if (err) {
+        return err;
+      }
+      res.json({
+        data: data,
+      });
     });
-  });
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 /* ---------------------------- FEMALE USER ------------------------ */
@@ -47,7 +50,6 @@ const editUser = async (req: Request, res: Response, next: NextFunction) => {
     req.body;
   const userParamsId = req.params.id;
   if (Object.values(email).length === 0) {
-    /* ------- empty value ------ */
     res.status(400).json({
       success: false,
       message: "No user is provided",
@@ -94,7 +96,6 @@ const editUser = async (req: Request, res: Response, next: NextFunction) => {
 const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
   const userParamsId = req.query.id || "userId";
   if (userParamsId.length === 0) {
-    /* ------- empty value ------ */
     res.status(400).json({
       success: false,
       message: "No user is provided",

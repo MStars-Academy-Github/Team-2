@@ -1,6 +1,8 @@
 import Users from "../model/users";
 import bcrypt from "bcryptjs";
 
+/* ------------------- USER REGISTER ------------------ */
+
 async function findUserEmail(params: any) {
   const { email, firstName } = params;
   const data = await Users.findOne({
@@ -30,6 +32,8 @@ async function createRegister(params: any) {
   };
 }
 
+/* ------------------- USER LOGIN ------------------ */
+
 async function findUserLogin(params: any) {
   const { email, password } = params;
   const data = await Users.find({
@@ -41,8 +45,37 @@ async function findUserLogin(params: any) {
   };
 }
 
+/* ----------------- FORGET PASSWORD ---------------- */
+
+async function findUserForgetEmail(email: String) {
+  const data = await Users.findOne({
+    email: email,
+  });
+  return {
+    data,
+  };
+}
+
+async function findUserForgetPass(randomString: any, email: String) {
+  const hashedPass = await bcrypt.hash(randomString, 10);
+  const data = await Users.updateOne(
+    {
+      email: email,
+    },
+    {
+      $set: {
+        password: hashedPass,
+      },
+    }
+  );
+  return {
+    data,
+  };
+}
 export default {
   findUserEmail,
   createRegister,
   findUserLogin,
+  findUserForgetEmail,
+  findUserForgetPass,
 };

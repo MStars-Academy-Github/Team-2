@@ -7,9 +7,10 @@ const router: Router = express.Router();
 router.get("/", UserController.getUsers);
 router.get("/femaleUsr", UserController.getUsersFemale);
 router.get("/maleUsr", UserController.getUsersMale);
-/*--------------- LOGIN , REGISTER -------------------------*/
+/*------ LOGIN , REGISTER, FORGET PASSWORD ----------------*/
 router.post("/register", AuthencationController.registerUser);
 router.post("/login", AuthencationController.loginUser);
+router.post("/forgetPass", AuthencationController.forgetPassword);
 /*--------------- UPDATE , DELETE -------------------------*/
 router.put("/:id", UserController.editUser);
 router.delete("/delete?", UserController.deleteUser);
