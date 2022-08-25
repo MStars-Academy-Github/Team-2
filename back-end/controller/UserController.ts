@@ -72,8 +72,14 @@ const editUser = async (req: Request, res: Response, next: NextFunction) => {
       res.status(200).json({
         success: true,
         data: {
-          email: email,
-          data: foundUser,
+          email,
+          password,
+          firstName,
+          lastName,
+          imgURL,
+          age,
+          sex,
+          hobby,
         },
       });
     } else {
