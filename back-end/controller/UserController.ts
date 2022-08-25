@@ -5,43 +5,38 @@ import userAllServices from "../services/userAllServices";
 const TOKEN_KEY = process.env.TOKEN_KEY || "password";
 
 /* ---------------------------- ALL USER ------------------------ */
-const getUsers = (req: Request, res: Response, next: NextFunction) => {
+const getUsers = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    Users.find({}, (err: Error, data: any) => {
-      if (err) {
-        return err;
-      }
-      res.json({
-        data: data,
-      });
-    });
+    res.json(await userAllServices.getUserAll());
   } catch (error) {
     console.error(error);
   }
 };
 
 /* ---------------------------- FEMALE USER ------------------------ */
-const getUsersFemale = (req: Request, res: Response, next: NextFunction) => {
-  Users.find({ sex: "female" }, (err: Error, data: any) => {
-    if (err) {
-      return err;
-    }
-    res.json({
-      data: data,
-    });
-  });
+const getUsersFemale = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    res.json(await userAllServices.getFindFemaleUser());
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 /* ---------------------------- MALE USER ------------------------ */
-const getUsersMale = (req: Request, res: Response, next: NextFunction) => {
-  Users.find({ sex: "male" }, (err: Error, data: any) => {
-    if (err) {
-      return err;
-    }
-    res.json({
-      data: data,
-    });
-  });
+const getUsersMale = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    res.json(await userAllServices.getFindMaleUser());
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 /* ----------------------- USER UPDATE ------------------------ */
@@ -94,32 +89,36 @@ const editUser = async (req: Request, res: Response, next: NextFunction) => {
 
 /* ----------------------- USER DELETE ------------------------ */
 const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
-  const userParamsId = req.query.id || "userId";
-  if (userParamsId.length === 0) {
-    res.status(400).json({
-      success: false,
-      message: "No user is provided",
-    });
-  } else {
-    const foundUser = await Users.deleteOne({
-      _id: userParamsId,
-    });
-
-    if (foundUser.deletedCount === 1) {
-      res.status(200).json({
-        success: true,
-        data: {
-          data: "user delete",
-        },
+  try {
+    const userParamsId = req.query.id || "userId";
+    if (userParamsId.length === 0) {
+      res.status(400).json({
+        success: false,
+        message: "No user is provided",
       });
     } else {
-      res.status(401).json({
-        success: false,
-        data: {
-          data: "Id do not match",
-        },
+      const foundUser = await Users.deleteOne({
+        _id: userParamsId,
       });
+
+      if (foundUser.deletedCount === 1) {
+        res.status(200).json({
+          success: true,
+          data: {
+            data: "user delete",
+          },
+        });
+      } else {
+        res.status(401).json({
+          success: false,
+          data: {
+            data: "delete",
+          },
+        });
+      }
     }
+  } catch (error) {
+    console.log(error);
   }
 };
 

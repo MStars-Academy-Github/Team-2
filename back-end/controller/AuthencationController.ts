@@ -14,8 +14,7 @@ const registerUser = async (
   next: NextFunction
 ) => {
   try {
-    const { email, password, firstName, lastName, imgURL, age, sex, hobby } =
-      req.body;
+    const { email, firstName } = req.body;
     if (Object.values(email).length === 0) {
       res.status(400).json({
         success: false,
