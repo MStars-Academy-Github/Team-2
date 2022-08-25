@@ -73,7 +73,7 @@ const editUser = async (req: Request, res: Response, next: NextFunction) => {
         success: true,
         data: {
           email: email,
-          data: "update user",
+          data: foundUser,
         },
       });
     } else {
