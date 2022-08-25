@@ -182,6 +182,7 @@ const Home: NextPage = () => {
                         width: "100%",
                         minHeight: "100%",
                         display: "flex",
+                        justifyContent: "space-between",
                       }}
                     >
                       <Box
@@ -196,13 +197,71 @@ const Home: NextPage = () => {
                         }}
                         src={user.imgURL}
                       />
-                      <div>
-                        <p>
-                          Name {user.firstName} {user.lastName}
-                        </p>
-                        <p>Age {user.age}</p>
-                        <p>Sex {user.sex}</p>
-                        <p>Hobby: {user.hobby}</p>
+                      <div
+                        style={{
+                          width: "50%",
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "space-around",
+                            width: "100%  ",
+                            padding: "15px",
+                          }}
+                        >
+                          <p style={{ fontSize: "15px" }}>Name</p>
+                          <p style={{ fontSize: "20px", fontWeight: "700" }}>
+                            {user.firstName} {user.lastName}
+                          </p>
+                        </div>
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "space-around",
+                            width: "100%  ",
+                            padding: "15px",
+                          }}
+                        >
+                          <p style={{ fontSize: "15px" }}>Age </p>
+                          <p style={{ fontSize: "20px", fontWeight: "700" }}>
+                            {user.age}
+                          </p>
+                        </div>
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "space-around",
+                            width: "100%  ",
+                            padding: "15px",
+                          }}
+                        >
+                          <p style={{ fontSize: "15px" }}>Sex </p>
+                          <p style={{ fontSize: "20px", fontWeight: "700" }}>
+                            {user.sex}
+                          </p>
+                        </div>
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "space-around",
+                            width: "100%  ",
+                            padding: "15px",
+                          }}
+                        >
+                          <p style={{ fontSize: "15px" }}>Hobby </p>
+                          <p style={{ fontSize: "20px", fontWeight: "700" }}>
+                            {user.hobby}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   ) : null}

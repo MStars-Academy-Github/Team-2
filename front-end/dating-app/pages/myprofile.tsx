@@ -21,7 +21,7 @@ export default function myprofile() {
   function submitHandler(e: any) {
     e.preventDefault();
     axios
-      .put(`http://localhost:3001/users/${user?.data.user._id}`, {
+      .put(`http://localhost:3001/users/${user?.data._id}`, {
         email: e.target.email.value,
         password: e.target.password.value,
         firstName: e.target.firstName.value,
@@ -34,6 +34,7 @@ export default function myprofile() {
       .then((res) => {
         console.log(res);
         if (res.status === 200) {
+          window.localStorage.setItem("user", JSON.stringify(res.data));
           router.push("/");
         }
       })
@@ -41,6 +42,7 @@ export default function myprofile() {
         console.error(err);
       });
   }
+  console.log(user?.data);
 
   return (
     <div>
@@ -61,29 +63,29 @@ export default function myprofile() {
         <TextField
           label="First Name"
           hiddenLabel
-          value={user?.data.user.firstName}
+          value={user?.data.firstName}
           variant="outlined"
           name="firstName"
         />
         <TextField
           label="Last Name"
-          value={user?.data.user.lastName}
+          value={user?.data.lastName}
           variant="outlined"
           name="lastName"
         />
         <TextField
           label="Email"
-          value={user?.data.user.email}
           variant="outlined"
           name="email"
           type="email"
+          required
         />
         <FormControl>
           <InputLabel id="demo-simple-select-label">Gender</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={user?.data.user.sex}
+            value={user?.data.sex}
             label="Gender"
             name="sex"
           >
@@ -93,7 +95,7 @@ export default function myprofile() {
         </FormControl>
         <TextField
           label="Age"
-          value={user?.data.user.age}
+          value={user?.data.age}
           variant="outlined"
           name="age"
           type="number"
@@ -102,13 +104,13 @@ export default function myprofile() {
         <TextField
           label="Image URL"
           variant="outlined"
-          value={user?.data.user.imgURL}
+          value={user?.data.imgURL}
           name="imgURL"
         />
         <TextField
           label="Hobby"
           variant="outlined"
-          value={user?.data.user.hobby}
+          value={user?.data.hobby}
           name="hobby"
         />
         <TextField
@@ -116,7 +118,7 @@ export default function myprofile() {
           variant="outlined"
           type="password"
           name="password"
-          value={user?.data.user.password}
+          value={user?.data.password}
         />
         <Button type="submit" variant="contained" color="success">
           Save
