@@ -1,11 +1,13 @@
 import Navbar from "./navbar";
 import Footer from "./footer";
 import InfoPanel from "./InfoPanel";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useEffect } from "react";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 export default function Layout({ children }: PropsWithChildren) {
   const router = useRouter();
+
   return (
     <div
       style={{
@@ -19,7 +21,6 @@ export default function Layout({ children }: PropsWithChildren) {
     >
       <Navbar />
       <main>{children}</main>
-      {router.pathname !== "/myprofile" ? <Footer /> : ""}
 
       <InfoPanel />
     </div>

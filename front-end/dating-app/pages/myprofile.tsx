@@ -7,7 +7,6 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import SelectInput from "@mui/material/Select/SelectInput";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -18,10 +17,12 @@ export default function myprofile() {
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("user") || "user"));
   }, []);
+
   function submitHandler(e: any) {
     e.preventDefault();
+
     axios
-      .put(`http://localhost:3001/users/${user?.data._id}`, {
+      .put(`http://localhost:3001/users/${user?.data.user._id}`, {
         email: e.target.email.value,
         password: e.target.password.value,
         firstName: e.target.firstName.value,
@@ -42,7 +43,7 @@ export default function myprofile() {
         console.error(err);
       });
   }
-  console.log(user?.data);
+  console.log(user);
 
   return (
     <div>
@@ -56,22 +57,23 @@ export default function myprofile() {
           borderRadius: "10px",
         }}
         spacing={2}
-        noValidate
         autoComplete="off"
         onSubmit={submitHandler}
       >
         <TextField
           label="First Name"
           hiddenLabel
-          value={user?.data.firstName}
+          defaultValue={user?.data.user.firstName}
           variant="outlined"
           name="firstName"
+          required
         />
         <TextField
           label="Last Name"
           value={user?.data.lastName}
           variant="outlined"
           name="lastName"
+          required
         />
         <TextField
           label="Email"
@@ -88,6 +90,7 @@ export default function myprofile() {
             value={user?.data.sex}
             label="Gender"
             name="sex"
+            required
           >
             <MenuItem value="male">Male</MenuItem>
             <MenuItem value="female">Female</MenuItem>
@@ -99,6 +102,7 @@ export default function myprofile() {
           variant="outlined"
           name="age"
           type="number"
+          required
         />
 
         <TextField
@@ -106,12 +110,14 @@ export default function myprofile() {
           variant="outlined"
           value={user?.data.imgURL}
           name="imgURL"
+          required
         />
         <TextField
           label="Hobby"
           variant="outlined"
           value={user?.data.hobby}
           name="hobby"
+          required
         />
         <TextField
           label="Password"
@@ -119,6 +125,7 @@ export default function myprofile() {
           type="password"
           name="password"
           value={user?.data.password}
+          required
         />
         <Button type="submit" variant="contained" color="success">
           Save

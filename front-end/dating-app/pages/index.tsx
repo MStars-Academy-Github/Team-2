@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 import styles from "../styles/Home.module.css";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
+import Footer from "../components/footer";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -293,6 +294,7 @@ const Home: NextPage = () => {
             />
           </Box>
         </div>
+        <Footer />
       </main>
     </div>
   );
