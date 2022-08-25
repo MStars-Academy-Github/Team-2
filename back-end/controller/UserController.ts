@@ -2,6 +2,7 @@
 import Users from "../model/users";
 import { NextFunction, Request, Response } from "express";
 import userAllServices from "../services/userAllServices";
+import bcrypt from "bcryptjs";
 const TOKEN_KEY = process.env.TOKEN_KEY || "password";
 
 /* ---------------------------- ALL USER ------------------------ */
@@ -43,8 +44,8 @@ const getUsersMale = async (
 
 const filterUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { age, sex } = req.body;
-    res.json(await userAllServices.getFindFilterUser(age, sex));
+    const { age, age1, sex } = req.body;
+    res.json(await userAllServices.getFindFilterUser(age, age1, sex));
   } catch (error) {
     console.error(error);
   }
@@ -61,6 +62,7 @@ const editUser = async (req: Request, res: Response, next: NextFunction) => {
       message: "No user is provided",
     });
   } else {
+    const hashedPass = await bcrypt.hash(password, 10);
     const foundUser = await Users.updateOne(
       {
         _id: userParamsId,
@@ -68,7 +70,7 @@ const editUser = async (req: Request, res: Response, next: NextFunction) => {
       {
         $set: {
           email: email,
-          password: password,
+          password: hashedPass,
           firstName: firstName,
           lastName: lastName,
           imgURL: imgURL,
