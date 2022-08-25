@@ -1,6 +1,15 @@
 import { useTheme } from "@emotion/react";
-import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
-import { Box, Button, MobileStepper, Paper, Typography } from "@mui/material";
+import ManIcon from "@mui/icons-material/Man";
+import Radio from "@mui/material/Radio";
+import {
+  Box,
+  Button,
+  FormLabel,
+  MobileStepper,
+  Paper,
+  RadioGroup,
+} from "@mui/material";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import axios from "axios";
 import type { NextPage } from "next";
 import Head from "next/head";
@@ -15,6 +24,7 @@ const Home: NextPage = () => {
   const theme = useTheme();
   const [users, setUsers] = useState<any>();
   const [activeStep, setActiveStep] = useState(0);
+  const [filterValue, setFilterValue] = useState("all");
   useEffect(() => {
     axios
       .get("http://localhost:3001/users")
@@ -37,6 +47,13 @@ const Home: NextPage = () => {
     setActiveStep(step);
   };
 
+  function sexHandler(e: any) {
+    setFilterValue(e.target.value);
+  }
+  function ageHandler(e: any) {
+    setFilterValue(e.target.value);
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -56,13 +73,15 @@ const Home: NextPage = () => {
       <main>
         <div
           style={{
-            backgroundColor: "rgba(0, 0, 0,  0.1)",
+            backgroundColor: "white",
+            color: "black",
             width: "600px",
             height: "460px",
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
             alignItems: "center",
+            marginBottom: " 10px",
           }}
         >
           <Box
@@ -78,12 +97,77 @@ const Home: NextPage = () => {
               sx={{
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center",
-                height: 50,
+                justifyContent: "space-between",
+                height: 70,
+
                 pl: 2,
                 bgcolor: "background.default",
               }}
-            ></Paper>
+            >
+              <Box component="form">
+                <FormLabel
+                  onChange={sexHandler}
+                  id="demo-row-radio-buttons-group-label"
+                >
+                  Gender
+                </FormLabel>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="row-radio-buttons-group"
+                >
+                  <FormControlLabel
+                    value="female"
+                    control={<Radio />}
+                    label="👩"
+                    onChange={sexHandler}
+                  />
+                  <FormControlLabel
+                    value="male"
+                    control={<Radio />}
+                    label="👨"
+                    color="success"
+                    onChange={sexHandler}
+                  />
+                  <FormControlLabel
+                    value="both"
+                    control={<Radio />}
+                    label="👫"
+                    onChange={sexHandler}
+                  />
+                </RadioGroup>
+              </Box>
+              <Box component="form">
+                <FormLabel id="demo-row-radio-buttons-group-label">
+                  Age
+                </FormLabel>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="row-radio-buttons-group"
+                >
+                  <FormControlLabel
+                    value="a"
+                    control={<Radio />}
+                    label="18-25"
+                    onChange={ageHandler}
+                  />
+                  <FormControlLabel
+                    value="b"
+                    control={<Radio />}
+                    label="26-37"
+                    onChange={ageHandler}
+                  />
+                  <FormControlLabel
+                    value="c"
+                    control={<Radio />}
+                    label="37+"
+                    onChange={ageHandler}
+                  />
+                </RadioGroup>
+              </Box>
+            </Paper>
+
             <AutoPlaySwipeableViews
               // axis={theme.direction === "rtl" ? "x-reverse" : "x"}
               index={activeStep}
