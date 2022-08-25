@@ -1,6 +1,5 @@
 import React from "react";
 import { Particles } from "@blackbox-vision/react-particles";
-import { tsParticles } from "tsparticles-engine";
 
 export default function ParticlesBackground() {
   return (

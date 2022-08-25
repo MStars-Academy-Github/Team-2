@@ -2,18 +2,14 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import RefreshIcon from "@mui/icons-material/Refresh";
 import ClearIcon from "@mui/icons-material/Clear";
 import StarIcon from "@mui/icons-material/Star";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import BoltIcon from "@mui/icons-material/Bolt";
 import axios from "axios";
 
-export default function Footer({ user }: any) {
+export default function Menu({ user }: any) {
   const [value, setValue] = React.useState(0);
-  function clearHandler(e: any) {
-    console.log(e);
-  }
 
   return (
     <Box sx={{}}>
@@ -23,7 +19,12 @@ export default function Footer({ user }: any) {
         onChange={(event, newValue) => {
           setValue(newValue);
         }}
-        style={{ display: "flex", flexDirection: "column", height: "100%" }}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          height: "100%",
+          backgroundColor: "rgba(0,0,0,0.0)",
+        }}
       >
         <BottomNavigationAction
           label="Clear from List"

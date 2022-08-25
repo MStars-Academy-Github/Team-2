@@ -1,9 +1,7 @@
 import Navbar from "./navbar";
-import Footer from "./footer";
 import InfoPanel from "./InfoPanel";
-import { PropsWithChildren, useEffect } from "react";
+import { PropsWithChildren } from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
 
 export default function Layout({ children }: PropsWithChildren) {
   const router = useRouter();

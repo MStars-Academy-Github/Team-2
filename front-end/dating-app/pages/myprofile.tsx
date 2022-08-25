@@ -10,6 +10,7 @@ import {
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 export default function myprofile() {
   const router = useRouter();
@@ -46,7 +47,11 @@ export default function myprofile() {
   console.log(user);
 
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <Stack
         component="form"
         sx={{
@@ -131,6 +136,6 @@ export default function myprofile() {
           Save
         </Button>
       </Stack>
-    </div>
+    </motion.div>
   );
 }

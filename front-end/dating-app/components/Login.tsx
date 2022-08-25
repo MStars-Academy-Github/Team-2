@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
 import Alert from "@mui/material/Alert";
+import { motion } from "framer-motion";
 
 type Props = {};
 
@@ -63,7 +64,12 @@ export default function Login({}: Props) {
     }
   }
   return (
-    <div style={{ backgroundColor: "#F29EC0" }}>
+    <motion.div
+      style={{ backgroundColor: "#F29EC0" }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       {register == false ? (
         <div
           style={{
@@ -166,36 +172,18 @@ export default function Login({}: Props) {
               >
                 Login
               </Button>
-              <span
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <hr
-                  style={{
-                    height: "2px",
-                    width: "100%",
-                    boxShadow: "0.1px 0.1px  grey ",
-                  }}
-                />
-                <span
-                  className="px-2 pb-1"
-                  style={{ textShadow: "1px 1px  black " }}
-                >
-                  or
-                </span>
-                <hr
-                  style={{
-                    height: "2px",
-                    width: "100%",
-                    boxShadow: "0.1px 0.1px  grey ",
-                  }}
-                />
-              </span>
             </Box>
 
+            <Button
+              type="submit"
+              variant="text"
+              style={{
+                width: "100%",
+                marginTop: "10px",
+              }}
+            >
+              forget password?
+            </Button>
             <Button
               type="submit"
               variant="contained"
@@ -379,6 +367,6 @@ export default function Login({}: Props) {
           </Box>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }
