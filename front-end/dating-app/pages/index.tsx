@@ -82,7 +82,7 @@ const Home: NextPage = () => {
             flexDirection: "column",
             justifyContent: "space-between",
             alignItems: "center",
-            marginBottom: " 10px",
+            marginBottom: " 250px",
           }}
         >
           <Box
@@ -169,7 +169,7 @@ const Home: NextPage = () => {
               </Box>
             </Paper>
 
-            <AutoPlaySwipeableViews
+            <SwipeableViews
               // axis={theme.direction === "rtl" ? "x-reverse" : "x"}
               index={activeStep}
               onChangeIndex={handleStepChange}
@@ -264,11 +264,12 @@ const Home: NextPage = () => {
                           </p>
                         </div>
                       </div>
+                      <Footer user={user} />
                     </div>
                   ) : null}
                 </div>
               ))}
-            </AutoPlaySwipeableViews>
+            </SwipeableViews>
             <MobileStepper
               steps={maxSteps}
               position="static"
@@ -294,7 +295,6 @@ const Home: NextPage = () => {
             />
           </Box>
         </div>
-        <Footer />
       </main>
     </div>
   );

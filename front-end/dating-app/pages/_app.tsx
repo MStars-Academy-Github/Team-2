@@ -21,14 +21,13 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </Layout>
       ) : (
-        <div className="flex ">
+        <div className="flex" style={{}}>
           <div>
             <iframe
-              style={{ width: "65vw", height: "100vh" }}
+              style={{ width: "65vw", height: "100%" }}
               src="https://my.spline.design/hands3duicopy-cd01dc26cd895fefc94394c2cf7c3612/"
             ></iframe>
           </div>
-          {/* <ParticlesBackground /> */}
           <Login />
         </div>
       )}
