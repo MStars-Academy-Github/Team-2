@@ -94,7 +94,7 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
           success: true,
           data: {
             email: email,
-            user: foundUser,
+            user: foundUser.data[0],
           },
           token: token,
         });
