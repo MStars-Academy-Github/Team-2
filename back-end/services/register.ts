@@ -13,6 +13,7 @@ async function findUserEmail(params: any) {
     data,
   };
 }
+
 async function createRegister(params: any) {
   const { email, password, firstName, lastName, imgURL, age, sex, hobby } =
     params;

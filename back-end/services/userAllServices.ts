@@ -21,8 +21,16 @@ async function getFindMaleUser() {
   };
 }
 
+async function getFindFilterUser(age: any, sex: any) {
+  const data = await Users.find({ age: age, sex: sex });
+  return {
+    data,
+  };
+}
+
 export default {
   getUserAll,
   getFindFemaleUser,
   getFindMaleUser,
+  getFindFilterUser,
 };
