@@ -11,8 +11,9 @@ router.get("/maleUsr", UserController.getUsersMale);
 router.post("/register", AuthencationController.registerUser);
 router.post("/login", AuthencationController.loginUser);
 router.post("/forgetPass", AuthencationController.forgetPassword);
-/*--------------- UPDATE , DELETE -------------------------*/
+/*--------------- UPDATE , DELETE, UPDATE -------------------------*/
 router.put("/:id", UserController.editUser);
 router.delete("/delete?", UserController.deleteUser);
+router.post("/filter", UserController.filterUser);
 
 export default router;

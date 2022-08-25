@@ -39,6 +39,16 @@ const getUsersMale = async (
   }
 };
 
+/* ------------------------- FILDER AGE, SEX --------------------- */
+
+const filterUser = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { age, sex } = req.body;
+    res.json(await userAllServices.getFindFilterUser(age, sex));
+  } catch (error) {
+    console.error(error);
+  }
+};
 /* ----------------------- USER UPDATE ------------------------ */
 const editUser = async (req: Request, res: Response, next: NextFunction) => {
   const { email, password, firstName, lastName, imgURL, age, sex, hobby } =
@@ -134,4 +144,5 @@ export default {
   deleteUser,
   getUsersFemale,
   getUsersMale,
+  filterUser,
 };
