@@ -49,6 +49,7 @@ const filterUser = async (req: Request, res: Response, next: NextFunction) => {
     console.error(error);
   }
 };
+
 /* ----------------------- USER UPDATE ------------------------ */
 const editUser = async (req: Request, res: Response, next: NextFunction) => {
   const { email, password, firstName, lastName, imgURL, age, sex, hobby } =
@@ -82,6 +83,7 @@ const editUser = async (req: Request, res: Response, next: NextFunction) => {
       res.status(200).json({
         success: true,
         data: {
+          _id: userParamsId,
           email,
           password,
           firstName,
