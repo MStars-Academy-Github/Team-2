@@ -22,7 +22,7 @@ async function getFindMaleUser() {
 }
 
 async function getFindFilterUser(age: any, sex: any) {
-  const data = await Users.find({ age: age, sex: sex });
+  const data = await Users.find({ age: { $gt: age }, sex: sex });
   return {
     data,
   };
