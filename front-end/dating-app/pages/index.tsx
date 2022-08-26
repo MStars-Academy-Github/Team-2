@@ -25,6 +25,7 @@ const Home: NextPage = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [filterValue, setFilterValue] = useState();
   const [filterValueGender, setFilterValueGender] = useState();
+
   useEffect(() => {
     axios
       .get("http://localhost:3001/users")
@@ -152,17 +153,17 @@ const Home: NextPage = () => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-                borderRadius: "20px",
+                borderRadius: "20px 20px 0px 0px",
                 padding: "30px",
-                backgroundColor: "rgba(250, 10, 10, 0.3)",
-                boxShadow: "0px 0px 20px  purple",
-                color: "white",
+                backgroundColor: "white",
+                // boxShadow: "0px 0px 20px  purple",
+                color: "black",
               }}
             >
               <Box component="form" onChange={filterHandler}>
                 <FormLabel
                   id="demo-row-radio-buttons-group-label"
-                  style={{ color: "white" }}
+                  style={{ color: "black" }}
                 >
                   Gender
                 </FormLabel>
@@ -188,7 +189,7 @@ const Home: NextPage = () => {
               <Box component="form" onChange={ageFilter}>
                 <FormLabel
                   id="demo-row-radio-buttons-group-label"
-                  style={{ color: "white" }}
+                  style={{ color: "black" }}
                 >
                   Age
                 </FormLabel>

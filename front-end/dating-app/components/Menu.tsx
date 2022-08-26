@@ -7,10 +7,14 @@ import StarIcon from "@mui/icons-material/Star";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import BoltIcon from "@mui/icons-material/Bolt";
 import axios from "axios";
+import { Button } from "@mui/material";
 
 export default function Menu({ user }: any) {
   const [value, setValue] = React.useState(0);
-
+  const [color, setColor] = React.useState(false);
+  function classfunc() {
+    setColor(true);
+  }
   return (
     <Box sx={{}}>
       <BottomNavigation
@@ -27,25 +31,33 @@ export default function Menu({ user }: any) {
         }}
       >
         <BottomNavigationAction
-          label="Clear from List"
-          icon={<ClearIcon color="error" />}
+          style={
+            color === true
+              ? {
+                  color: "green",
+                }
+              : { color: "red" }
+          }
+          icon={<ClearIcon />}
           onClick={() => {
             axios.delete(`http://localhost:3001/users/delete?id=${user._id}`);
             window.location.reload();
           }}
         />
+        <BottomNavigationAction icon={<StarIcon color="info" />} />
         <BottomNavigationAction
-          label="Add Star"
-          icon={<StarIcon color="info" />}
+          style={
+            color === true
+              ? {
+                  color: "red",
+                }
+              : { color: "green" }
+          }
+          onClick={classfunc}
+          icon={<FavoriteIcon />}
         />
-        <BottomNavigationAction
-          label="I like it!"
-          icon={<FavoriteIcon color="success" />}
-        />
-        <BottomNavigationAction
-          label="Speed"
-          icon={<BoltIcon color="primary" />}
-        />
+
+        <BottomNavigationAction icon={<BoltIcon color="primary" />} />
       </BottomNavigation>
     </Box>
   );
