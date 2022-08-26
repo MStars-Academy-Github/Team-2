@@ -1,6 +1,5 @@
 // CRUD
 import Users from "../model/users";
-import LikeUsers from "../model/likeusers";
 
 import { NextFunction, Request, Response } from "express";
 import userAllServices from "../services/userAllServices";
