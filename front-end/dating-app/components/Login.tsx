@@ -1,4 +1,21 @@
-import { Box, Button, Collapse, IconButton, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  ClickAwayListener,
+  Collapse,
+  Divider,
+  Drawer,
+  FormControl,
+  FormLabel,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  SwipeableDrawer,
+  TextField,
+} from "@mui/material";
 import React, { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
@@ -6,11 +23,34 @@ import Alert from "@mui/material/Alert";
 import { motion } from "framer-motion";
 
 type Props = {};
+type Anchor = "top" | "left" | "bottom" | "right";
 
 export default function Login({}: Props) {
   const [register, setRegister] = useState(false);
   const [open, setOpen] = React.useState(false);
   const [openSuccess, setOpenSuccess] = React.useState(false);
+  const [newPass, setNewPass] = useState();
+  const [state, setState] = React.useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
+  });
+  const toggleDrawer =
+    (anchor: Anchor, open: boolean) =>
+    (event: React.KeyboardEvent | React.MouseEvent) => {
+      if (
+        event &&
+        event.type === "keydown" &&
+        ((event as React.KeyboardEvent).key === "Tab" ||
+          (event as React.KeyboardEvent).key === "Shift")
+      ) {
+        return;
+      }
+
+      setState({ ...state, [anchor]: open });
+    };
+
   function loginHandler(e: any) {
     e.preventDefault();
     axios
@@ -63,6 +103,86 @@ export default function Login({}: Props) {
       setOpen(true);
     }
   }
+
+  function forgetPassHandler(e: any) {
+    e.preventDefault();
+    axios
+      .post("http://localhost:3001/users/forgetPass", {
+        email: e.target.email.value,
+      })
+      .then((res) => {
+        setNewPass(res.data.data.newPass);
+      })
+      .catch((err) => console.error(err));
+    console.log(e.target.email.value);
+  }
+
+  const list = (anchor: Anchor) => (
+    <Box
+      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, true)}
+      onKeyDown={toggleDrawer(anchor, true)}
+    >
+      <List
+        style={{
+          width: "100%",
+          textAlign: "center",
+          height: "20vh",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <h1
+          style={{
+            textTransform: "uppercase",
+            fontSize: "40px",
+            fontWeight: "700",
+          }}
+        >
+          Forget Password?
+        </h1>
+        <h2>What's your email address?</h2>
+      </List>
+      <Divider />
+      <List
+        style={{
+          width: "100%",
+          textAlign: "center",
+          height: "20vh",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Box component="form" onSubmit={forgetPassHandler}>
+          <FormControl>
+            <FormLabel>Email</FormLabel>
+            <TextField label="Email" name="email"></TextField>
+            <Button
+              variant="contained"
+              color="success"
+              className="bg-[green] mt-[10px]"
+              type="submit"
+            >
+              Send!
+            </Button>
+          </FormControl>
+        </Box>
+        {newPass ? (
+          <p className="flex flex-col mt-[5px] text-[18px] font-[600]">
+            Your New password is{" "}
+            <span style={{ fontSize: "20px", color: "green" }}>{newPass}</span>
+          </p>
+        ) : (
+          ""
+        )}
+      </List>
+    </Box>
+  );
   return (
     <motion.div
       style={{ backgroundColor: "#F29EC0" }}
@@ -73,7 +193,7 @@ export default function Login({}: Props) {
       {register == false ? (
         <div
           style={{
-            width: "100vw",
+            width: "35vw",
             height: "100vh",
             display: "flex",
             justifyContent: "center",
@@ -176,16 +296,6 @@ export default function Login({}: Props) {
 
             <Button
               type="submit"
-              variant="text"
-              style={{
-                width: "100%",
-                marginTop: "10px",
-              }}
-            >
-              forget password?
-            </Button>
-            <Button
-              type="submit"
               variant="contained"
               style={{
                 backgroundColor: "green",
@@ -198,6 +308,29 @@ export default function Login({}: Props) {
               register
             </Button>
           </Box>
+          <div
+            style={{
+              textAlign: "center",
+              width: "21vw",
+              marginTop: "10px",
+            }}
+          >
+            {(["top"] as const).map((anchor) => (
+              <React.Fragment key={anchor}>
+                <Button onClick={toggleDrawer(anchor, true)} color="error">
+                  Forget Pass ?
+                </Button>{" "}
+                <SwipeableDrawer
+                  anchor={anchor}
+                  open={state[anchor]}
+                  onClose={toggleDrawer(anchor, false)}
+                  onOpen={toggleDrawer(anchor, true)}
+                >
+                  {list(anchor)}
+                </SwipeableDrawer>
+              </React.Fragment>
+            ))}
+          </div>
         </div>
       ) : (
         <div
