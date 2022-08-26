@@ -155,7 +155,7 @@ const Home: NextPage = () => {
                 justifyContent: "space-between",
                 borderRadius: "20px 20px 0px 0px",
                 padding: "30px",
-                backgroundColor: "white",
+                backgroundColor: "rgba(255,255,255,0.2)",
                 // boxShadow: "0px 0px 20px  purple",
                 color: "black",
               }}
@@ -317,7 +317,11 @@ const Home: NextPage = () => {
               ))}
             </AutoPlaySwipeableViews>
             <MobileStepper
-              style={{ borderRadius: "0px 0px 20px 20px", padding: "20px" }}
+              style={{
+                borderRadius: "0px 0px 20px 20px",
+                padding: "20px",
+                backgroundColor: "rgba(255,255,255,0.2)",
+              }}
               steps={maxSteps}
               position="static"
               activeStep={activeStep}
@@ -326,6 +330,8 @@ const Home: NextPage = () => {
                   size="small"
                   onClick={handleNext}
                   disabled={activeStep === maxSteps - 1}
+                  variant="contained"
+                  style={{ backgroundColor: "#FF4A4A", color: "white" }}
                 >
                   Next
                 </Button>
@@ -335,6 +341,9 @@ const Home: NextPage = () => {
                   size="small"
                   onClick={handleBack}
                   disabled={activeStep === 0}
+                  color="error"
+                  variant="contained"
+                  style={{ backgroundColor: "#FF4A4A", color: "white" }}
                 >
                   Back
                 </Button>
