@@ -12,9 +12,15 @@ import { Button } from "@mui/material";
 export default function Menu({ user }: any) {
   const [value, setValue] = React.useState(0);
   const [color, setColor] = React.useState(false);
+  const [loggedUser, setLoggedUser] = React.useState<any>();
+  React.useEffect(() => {
+    setLoggedUser(JSON.parse(window.localStorage.getItem("user") || "user"));
+  }, []);
   function classfunc() {
     setColor(true);
   }
+  console.log(loggedUser);
+
   return (
     <Box sx={{}}>
       <BottomNavigation
@@ -40,7 +46,9 @@ export default function Menu({ user }: any) {
           }
           icon={<ClearIcon />}
           onClick={() => {
-            axios.delete(`http://localhost:3001/users/delete?id=${user._id}`);
+            axios.delete(
+              `http://localhost:3001/users/delete?id=${loggedUser.data.user._id}&userLike=${user._id}`
+            );
             window.location.reload();
           }}
         />
