@@ -1,12 +1,10 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+import { Button, Typography, Toolbar, Box, AppBar } from "@mui/material";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { useRouter } from "next/router";
 
 export default function Navbar() {
+  const router = useRouter();
   const [user, setUser] = React.useState<any>();
   React.useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("user") || "user"));
@@ -26,9 +24,13 @@ export default function Navbar() {
         }}
       >
         <Toolbar>
+          <div style={{ width: "10vw" }}></div>
           <Typography
             variant="h6"
             component="div"
+            onClick={() => {
+              router.push("/");
+            }}
             sx={{
               flexGrow: 1,
               textAlign: "center",
@@ -39,7 +41,7 @@ export default function Navbar() {
           >
             Dating App
           </Typography>
-          <FormControl style={{ minWidth: "10vw" }} color="error">
+          <FormControl style={{ width: "10vw" }} color="error">
             <InputLabel id="labelForEmail" color="error">
               {user?.data.email}
             </InputLabel>
@@ -47,7 +49,7 @@ export default function Navbar() {
               value={user?.data.email}
               labelId="labelForEmail"
               style={{ backgroundColor: "white" }}
-              variant="outlined"
+              variant="filled"
               color="error"
             >
               <MenuItem>
