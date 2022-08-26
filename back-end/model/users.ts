@@ -26,9 +26,7 @@ const UsersSchema = new Schema({
   hobby: {
     type: String,
   },
-  liked: {
-    type: String,
-  },
+  liked: [String],
 });
 
 const Users = mongoose.model("users", UsersSchema);

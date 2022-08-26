@@ -10,7 +10,8 @@ const TOKEN_KEY = process.env.TOKEN_KEY || "password";
 /* ---------------------------- ALL USER ------------------------ */
 const getUsers = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    res.json(await userAllServices.getUserAll());
+    const { loggedUser } = req.body;
+    res.json(await userAllServices.getUserAll(loggedUser));
   } catch (error) {
     console.error(error);
   }
@@ -115,8 +116,6 @@ const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
     const userParamsId = req.query.id || "userId";
     const userLikedId = req.query.userLike || "userId";
 
-    const userParamsIdLike = req.query.likedUserId || "userId";
-
     if (userParamsId.length === 0) {
       res.status(400).json({
         success: false,
@@ -133,9 +132,7 @@ const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
             _id: userParamsId,
           },
           {
-            $set: {
-              liked: userLikedId,
-            },
+            $push: { liked: userLikedId },
           }
         );
       }
