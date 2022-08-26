@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
-const UsersSchema = new Schema({
+const LIkeUsersSchema = new Schema({
   email: {
     type: String,
   },
@@ -26,9 +26,7 @@ const UsersSchema = new Schema({
   hobby: {
     type: String,
   },
-  liked: [String],
 });
 
-const Users = mongoose.model("users", UsersSchema);
-
-export default Users;
+const LikeUsers = mongoose.model("likeUser", LIkeUsersSchema);
+export default LikeUsers;

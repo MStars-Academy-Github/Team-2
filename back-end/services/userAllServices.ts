@@ -1,7 +1,11 @@
 import Users from "../model/users";
+import LikeUsers from "../model/likeusers";
 
-async function getUserAll() {
-  const data = await Users.find({});
+async function getUserAll(id: any) {
+  const data1 = await Users.find({
+    _id: id,
+  });
+  const data = await Users.find({ _id: { $nin: data1[0].liked } });
   return {
     data,
   };

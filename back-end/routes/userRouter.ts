@@ -4,7 +4,7 @@ import AuthencationController from "../controller/AuthencationController";
 const router: Router = express.Router();
 
 /*------------------- ALL USER ----------------------------*/
-router.get("/", UserController.getUsers);
+router.post("/", UserController.getUsers);
 router.get("/femaleUsr", UserController.getUsersFemale);
 router.get("/maleUsr", UserController.getUsersMale);
 /*------ LOGIN , REGISTER, FORGET PASSWORD ----------------*/
