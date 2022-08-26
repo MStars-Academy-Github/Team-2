@@ -27,8 +27,12 @@ const Home: NextPage = () => {
   const [filterValueGender, setFilterValueGender] = useState();
 
   useEffect(() => {
+    let loggedUser = JSON.parse(window.localStorage.getItem("user") || "user");
+
     axios
-      .get("http://localhost:3001/users")
+      .post("http://localhost:3001/users", {
+        loggedUser: loggedUser.data.user._id,
+      })
       .then((res) => {
         setUsers(res.data.data);
       })

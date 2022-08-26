@@ -19,7 +19,6 @@ export default function Menu({ user }: any) {
   function classfunc() {
     setColor(true);
   }
-  console.log(loggedUser);
 
   return (
     <Box sx={{}}>
