@@ -78,7 +78,6 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
       const validPassword = foundUser.data[0].password || "not valid password";
       const validFirstName =
         foundUser.data[0].firstName || "not valid firstname";
-
       if (await bcrypt.compare(password, validPassword)) {
         const token = jwt.sign(
           {

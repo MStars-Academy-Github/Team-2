@@ -1,5 +1,7 @@
 // CRUD
 import Users from "../model/users";
+import LikeUsers from "../model/likeusers";
+
 import { NextFunction, Request, Response } from "express";
 import userAllServices from "../services/userAllServices";
 import bcrypt from "bcryptjs";
@@ -111,31 +113,48 @@ const editUser = async (req: Request, res: Response, next: NextFunction) => {
 const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const userParamsId = req.query.id || "userId";
+    const userLikedId = req.query.userLike || "userId";
+
+    const userParamsIdLike = req.query.likedUserId || "userId";
+
     if (userParamsId.length === 0) {
       res.status(400).json({
         success: false,
         message: "No user is provided",
       });
     } else {
-      const foundUser = await Users.deleteOne({
+      const foundUser: any = await Users.find({
         _id: userParamsId,
       });
 
-      if (foundUser.deletedCount === 1) {
-        res.status(200).json({
-          success: true,
-          data: {
-            data: "user delete",
+      if (foundUser) {
+        await Users.updateOne(
+          {
+            _id: userParamsId,
           },
-        });
-      } else {
-        res.status(401).json({
-          success: false,
-          data: {
-            data: "delete",
-          },
-        });
+          {
+            $set: {
+              liked: userLikedId,
+            },
+          }
+        );
       }
+
+      // if (foundUser.deletedCount === 1) {
+      //   res.status(200).json({
+      //     success: true,
+      //     data: {
+      //       data: "user delete",
+      //     },
+      //   });
+      // } else {
+      //   res.status(401).json({
+      //     success: false,
+      //     data: {
+      //       data: "delete",
+      //     },
+      //   });
+      // }
     }
   } catch (error) {
     console.log(error);

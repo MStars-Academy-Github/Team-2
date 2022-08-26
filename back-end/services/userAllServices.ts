@@ -1,4 +1,5 @@
 import Users from "../model/users";
+import LikeUsers from "../model/likeusers";
 
 async function getUserAll() {
   const data = await Users.find({});
