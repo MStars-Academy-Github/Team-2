@@ -30,7 +30,7 @@ const Home: NextPage = () => {
     let loggedUser = JSON.parse(window.localStorage.getItem("user") || "user");
 
     axios
-      .post("http://localhost:3001/users", {
+      .post("http://54.190.80.76:3001/users", {
         loggedUser: loggedUser.data.user._id,
       })
       .then((res) => {
@@ -42,7 +42,7 @@ const Home: NextPage = () => {
   useEffect(() => {
     if (filterValue == "1") {
       axios
-        .post("http://localhost:3001/users/filter", {
+        .post("http://54.190.80.76:3001/users/filter", {
           sex: filterValueGender,
           age: 18,
           age1: 25,
@@ -53,7 +53,7 @@ const Home: NextPage = () => {
         .catch((err) => console.error(err));
     } else if (filterValue == "2") {
       axios
-        .post("http://localhost:3001/users/filter", {
+        .post("http://54.190.80.76:3001/users/filter", {
           sex: filterValueGender,
           age: 26,
           age1: 37,
@@ -64,7 +64,7 @@ const Home: NextPage = () => {
         .catch((err) => console.error(err));
     } else if (filterValue == "3") {
       axios
-        .post("http://localhost:3001/users/filter", {
+        .post("http://54.190.80.76:3001/users/filter", {
           sex: filterValueGender,
           age: 37,
           age1: 100,
@@ -75,7 +75,7 @@ const Home: NextPage = () => {
         .catch((err) => console.error(err));
     } else {
       axios
-        .post("http://localhost:3001/users/filter", {
+        .post("http://54.190.80.76:3001/users/filter", {
           sex: filterValueGender,
         })
         .then((res) => {
