@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-export default function myprofile() {
+export default function Myprofile() {
   const router = useRouter();
   const [user, setUser] = useState<any>();
   useEffect(() => {
