@@ -83,6 +83,7 @@ export default function Login({}: Props) {
               style={{
                 width: "100%",
                 marginBottom: "20px",
+                backgroundColor: "white",
               }}
             />
             <TextField

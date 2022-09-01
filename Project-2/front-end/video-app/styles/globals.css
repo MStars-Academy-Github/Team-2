@@ -25,4 +25,11 @@ a {
   html {
     color-scheme: dark;
   }
+<<<<<<< HEAD
+  body {
+    color: black;
+    background-color: white;
+  }
+=======
+>>>>>>> d3ff7fbd414d75c649ea611138b54ef6339b4ad7
 }
