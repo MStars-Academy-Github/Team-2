@@ -24,7 +24,7 @@ export default function SideNavigationBar({ user }: any) {
           Home
         </Button>
       </Link>
-      <Link href={`/edit/${user?._id}`}>
+      <Link href={`/profile/${user?._id}`}>
         <Button
           style={{ display: "flex", flexDirection: "column", color: "#fffcf2" }}
         >
