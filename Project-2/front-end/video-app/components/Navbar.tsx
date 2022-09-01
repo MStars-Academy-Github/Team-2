@@ -38,9 +38,14 @@ const Navbar = () => {
   const handleCloseUpload = () => {
     setOpen(false);
   };
-  const ref = useRef();
-  const handleUploadSelect = () => {
-    console.log(ref.current);
+
+  const handleUploadSelect = (e: any) => {
+    e.preventDefault();
+    // console.log(e.target[0].value);
+    const video = e.target[0].value;
+    const title = e.target.title.value;
+    console.log(video);
+    console.log(title);
   };
 
   const router = useRouter();
@@ -195,7 +200,45 @@ const Navbar = () => {
               Upload videos
             </Typography>
             <img src="upload1.gif" alt="" className={style.img} />
-            <Button onClick={handleUploadSelect}>SELECT FILES</Button>
+            {/* <Button onClick={handleUploadSelect}>SELECT FILES</Button> */}
+            <Box
+              component="form"
+              onSubmit={handleUploadSelect}
+              noValidate
+              autoComplete="off"
+            >
+              <input
+                accept="video/*"
+                id="contained-button-file"
+                multiple
+                type="file"
+              />
+
+              <TextField
+                required
+                defaultValue="Hello World"
+                variant="standard"
+                name="title"
+                type="text"
+                style={{
+                  width: "100%",
+                  marginTop: "20px",
+                  marginBottom: "20px",
+                }}
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                style={{
+                  backgroundColor: "green",
+                  width: "100%",
+                  marginTop: "20px",
+                  background: "#e63946",
+                }}
+              >
+                UPLOAD
+              </Button>
+            </Box>
           </div>
         </Box>
       </Modal>
