@@ -8,14 +8,13 @@ export default function watch() {
   return (
     <div
       style={{
-        height: "1000px",
-        width: "100%",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: "#343a40",
       }}
     >
-      <ReactPlayer url={video} width="60vw" height="30vw" />
+      <ReactPlayer url={`${video}`} width="60vw" height="30vw" />
     </div>
   );
 }
