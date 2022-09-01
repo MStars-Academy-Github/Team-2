@@ -9,12 +9,6 @@ export interface IUser {
   register: string;
 }
 
-export interface IVideo {
-  title: string;
-  tags: string;
-  url: string;
-}
-
 export interface IUserDoc extends IUser, Document {
   isPasswordMatch(password: string): Promise<boolean>;
 }

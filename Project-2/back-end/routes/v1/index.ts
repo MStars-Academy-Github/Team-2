@@ -1,7 +1,7 @@
 import express, { Router } from "express";
 import userRoute from "./user.route";
 import authRoute from "./auth.route";
-import videosRoute from "./videos.route";
+import mediaRoute from "./media.route";
 import cors from "cors";
 
 const router = express.Router();
@@ -13,5 +13,5 @@ interface IRoute {
 router.use(cors());
 router.use("/users", userRoute);
 router.use("/auth", authRoute);
-router.use("/videos", videosRoute);
+router.use("/media", mediaRoute);
 export default router;
