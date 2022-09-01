@@ -33,7 +33,6 @@ export default function Main({}: Props) {
         gap: "30px",
         padding: "30px",
       }}
-      className="container"
     >
       <>
         {media.map((video) => {

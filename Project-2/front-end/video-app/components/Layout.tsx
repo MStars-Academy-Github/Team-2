@@ -1,6 +1,7 @@
 import Navbar from "./Navbar";
 import Footbar from "./Footbar";
 import { PropsWithChildren } from "react";
+import SideNavigationBar from "./SideNavigationBar";
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
@@ -11,11 +12,22 @@ export default function Layout({ children }: PropsWithChildren) {
         justifyContent: "space-between",
         alignItems: "center",
         height: "100vh",
-        width: "100vw",
+        maxWidth: "100vw",
       }}
     >
       <Navbar />
-      <main>{children}</main>
+      <div
+        style={{
+          display: "flex",
+          marginTop: "60px",
+          width: "100vw",
+          justifyContent: "space-between",
+        }}
+      >
+        <SideNavigationBar />
+        <main style={{ width: "100%" }}>{children}</main>
+      </div>
+
       <Footbar />
     </div>
   );
