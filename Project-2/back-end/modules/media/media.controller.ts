@@ -9,7 +9,6 @@ let gridfs = null;
 mongoose.connection.on("connected", () => {
   gridfs = new mongo.GridFSBucket(mongoose.connection.db);
 });
-
 export const getMedia = async (req: Request, res: Response) => {
   const user = await mediaService.getMedia();
   res.send(user);
