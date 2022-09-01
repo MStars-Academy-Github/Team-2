@@ -1,4 +1,4 @@
-import mongoose, { Model, Document } from "mongoose";
+import mongoose, { Model, Document, ObjectId } from "mongoose";
 
 export interface IUser {
   firstName: string;
@@ -7,6 +7,12 @@ export interface IUser {
   phone: number;
   password: string;
   register: string;
+}
+
+export interface IVideo {
+  title: string;
+  tags: string;
+  url: string;
 }
 
 export interface IUserDoc extends IUser, Document {
