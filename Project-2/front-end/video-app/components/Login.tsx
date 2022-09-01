@@ -62,7 +62,12 @@ export default function Login({}: Props) {
         <Box
           component="form"
           sx={{
-            width: "100%",
+            width: "100vw",
+            height: "100vh",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
           }}
           noValidate
           autoComplete="off"
@@ -80,7 +85,6 @@ export default function Login({}: Props) {
                 marginBottom: "20px",
               }}
             />
-
             <TextField
               id="standard-password-input"
               name="password"
@@ -93,39 +97,45 @@ export default function Login({}: Props) {
                 marginBottom: "20px",
               }}
             />
+            <Button
+              type="submit"
+              variant="contained"
+              style={{
+                backgroundColor: "green",
+                width: "100%",
+                marginTop: "20px",
+                background: "#e63946",
+              }}
+            >
+              login
+            </Button>
+            <br />
+            <Button
+              type="submit"
+              variant="contained"
+              style={{
+                backgroundColor: "green",
+                width: "100%",
+                marginTop: "20px",
+                background: "#e63946",
+              }}
+              onClick={registerHandlerOpen}
+            >
+              register
+            </Button>
           </div>
-          <Button
-            type="submit"
-            variant="contained"
-            style={{
-              backgroundColor: "green",
-              width: "100%",
-              marginTop: "20px",
-              background: "#e63946",
-            }}
-          >
-            login
-          </Button>
-          <Button
-            type="submit"
-            variant="contained"
-            style={{
-              backgroundColor: "green",
-              width: "100%",
-              marginTop: "20px",
-              background: "#e63946",
-            }}
-            onClick={registerHandlerOpen}
-          >
-            register
-          </Button>
         </Box>
       ) : (
         <Box
           component="form"
           sx={{
-            width: "100%",
-            padding: "20%",
+            width: "100vw",
+            height: "100vh",
+            display: "flex",
+            padding: "0% 35% 0% 35%",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
           }}
           noValidate
           autoComplete="off"
@@ -202,19 +212,19 @@ export default function Login({}: Props) {
                 marginBottom: "20px",
               }}
             />
+            <Button
+              type="submit"
+              variant="contained"
+              style={{
+                backgroundColor: "green",
+                width: "100%",
+                marginTop: "20px",
+                background: "#e63946",
+              }}
+            >
+              register
+            </Button>
           </div>
-          <Button
-            type="submit"
-            variant="contained"
-            style={{
-              backgroundColor: "green",
-              width: "100%",
-              marginTop: "20px",
-              background: "#e63946",
-            }}
-          >
-            register
-          </Button>
         </Box>
       )}
     </div>
