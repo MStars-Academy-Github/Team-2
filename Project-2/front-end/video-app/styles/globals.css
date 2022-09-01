@@ -1,7 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body {
+  color: black;
   padding: 0;
   margin: 0;
+  background-color: white;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
@@ -19,8 +25,11 @@ a {
   html {
     color-scheme: dark;
   }
+<<<<<<< HEAD
   body {
     color: black;
     background-color: white;
   }
+=======
+>>>>>>> d3ff7fbd414d75c649ea611138b54ef6339b4ad7
 }

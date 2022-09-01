@@ -6,7 +6,7 @@ type Props = {};
 
 export default function Login({}: Props) {
   const [register, setRegister] = useState(false);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   function loginHandler(e: any) {
     e.preventDefault();
