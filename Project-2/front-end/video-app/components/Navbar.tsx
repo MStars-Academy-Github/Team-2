@@ -16,9 +16,8 @@ export default function Navbar({}: Props) {
     window.location.reload();
   }
   return (
-    <Box sx={{ flexGrow: 1, width: "100vw" }} style={{}}>
+    <Box sx={{ flexGrow: 1, width: "100vw", position: "sticky" }} style={{}}>
       <AppBar
-        position="static"
         style={{
           backgroundColor: "red",
           color: "white",
