@@ -66,11 +66,12 @@ const Navbar = () => {
       method: "post",
       url: "http://localhost:3001/v1/media/upload",
       data: formData,
-
       headers: { "Content-Type": "multipart/form-data" },
     })
       .then((res) => {
-        console.log(res);
+        if (res.status == 200) {
+          alert("upload amjiltai hiigdlee");
+        }
       })
       .catch((err) => {
         console.error(err);
