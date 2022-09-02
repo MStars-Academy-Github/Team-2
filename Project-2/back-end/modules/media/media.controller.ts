@@ -1,39 +1,52 @@
 import { Request, Response } from "express";
 import * as mediaService from "./media.services";
-import formidable from "formidable";
+import formidable, { Fields } from "formidable";
 import mongoose, { mongo } from "mongoose";
 import Media from "./media.model";
 import { User } from "../user";
+import { GridFSBucket } from "mongodb";
+import fs from "fs";
 
-let gridfs = null;
+let gridfs: GridFSBucket;
 mongoose.connection.on("connected", () => {
-  gridfs = new mongo.GridFSBucket(mongoose.connection.db);
+  gridfs = new mongoose.mongo.GridFSBucket(mongoose.connection.db);
 });
-export const getMedia = async (req: Request, res: Response) => {
-  const user = await mediaService.getMedia();
-  res.send(user);
-};
 
 export const createMedia = async (req: Request, res: Response) => {
   let form = new formidable.IncomingForm();
-  form.parse(req, async (err, fields, files) => {
+  form.parse(req, async (err: Error, fields: Fields, files: any) => {
     if (err) {
       return res.status(400).json({
         error: "Video could not be uploaded",
       });
     }
-    const user = await User.findById("631010cfbafc18c3ea94d78d");
-    console.log(fields);
+
+    const user = await User.findById("630ec6b19da3aa3e2f95d8f7");
+    console.log(user);
+
     let media = new Media(fields);
+    media.postedBy = user?._id;
+
+    const file = files["video"];
+    console.log(file);
     console.log(media);
-    media.postedBy = user?.id;
-    if (files.media) {
-      console.log("here");
+
+    //save the parse file
+    if (file) {
       let writeStream = gridfs.openUploadStream(media._id.toString(), {
-        contentType: files.media.mimiType || "binary/octet-stream",
+        contentType: "binary/octet-stream",
+      });
+      fs.createReadStream(file.filepath).pipe(writeStream);
+    }
+    try {
+      let result = await media.save();
+      return res.status(200).json({
+        data: result,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        error: "Error during upload",
       });
     }
   });
-  console.log(req.body);
-  res.json("create media");
 };
