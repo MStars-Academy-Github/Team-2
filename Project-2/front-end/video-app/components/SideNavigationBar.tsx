@@ -3,9 +3,13 @@ import HomeIcon from "@mui/icons-material/Home";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PersonIcon from "@mui/icons-material/Person";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-export default function SideNavigationBar({ user }: any) {
-  console.log(user);
+export default function SideNavigationBar() {
+  const [user, setUser] = useState<any>();
+  useEffect(() => {
+    setUser(JSON.parse(window.localStorage.getItem("user") || "user"));
+  }, []);
   return (
     <div
       style={{
@@ -24,7 +28,7 @@ export default function SideNavigationBar({ user }: any) {
           Home
         </Button>
       </Link>
-      <Link href={`/profile/${user?._id}`}>
+      <Link href={`/profile/${user.user._id}`}>
         <Button
           style={{ display: "flex", flexDirection: "column", color: "#fffcf2" }}
         >
@@ -32,18 +36,14 @@ export default function SideNavigationBar({ user }: any) {
           Profile
         </Button>
       </Link>
-      <Link href="/">
+      <Link href={`/edit/${user.user._id}`}>
         <Button
           style={{ display: "flex", flexDirection: "column", color: "#fffcf2" }}
         >
           <SettingsIcon />
-          Settings
+          Edit Profile
         </Button>
       </Link>
     </div>
   );
 }
-SideNavigationBar.getInitialProps = async () => {
-  const user = await JSON.parse(window.localStorage.getItem("user") || "user");
-  return { user: user };
-};
