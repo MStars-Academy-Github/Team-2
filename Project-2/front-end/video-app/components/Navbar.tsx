@@ -46,6 +46,9 @@ const Navbar = () => {
     const title = e.target.title.value;
     console.log(video);
     console.log(title);
+    console.log(e.target.description.value);
+    console.log(e.target.genre.value);
+    console.log(e.taget.views.value);
   };
 
   const router = useRouter();
@@ -61,10 +64,7 @@ const Navbar = () => {
 
   return (
     <>
-
-
       <AppBar sx={{ backgroundColor: "#006c6e" }}>
-
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Typography
@@ -115,13 +115,12 @@ const Navbar = () => {
               }}
               component="button"
               onClick={handleOpenUpload}
-            >
-              <img
-                src="upload.png"
-                alt=""
-                style={{ width: "50px", marginRight: "10px" }}
-              />
-            </Box>
+            ></Box>
+            <img
+              src="upload.png"
+              alt=""
+              style={{ width: "50px", marginRight: "10px" }}
+            />
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton
@@ -201,9 +200,45 @@ const Navbar = () => {
 
               <TextField
                 required
-                defaultValue="Hello World"
+                label="Title"
                 variant="standard"
                 name="title"
+                type="text"
+                style={{
+                  width: "100%",
+                  marginTop: "20px",
+                  marginBottom: "20px",
+                }}
+              />
+              <TextField
+                required
+                label="description"
+                variant="standard"
+                name="description"
+                type="text"
+                style={{
+                  width: "100%",
+                  marginTop: "20px",
+                  marginBottom: "20px",
+                }}
+              />
+              <TextField
+                required
+                label="genra"
+                variant="standard"
+                name="genra"
+                type="text"
+                style={{
+                  width: "100%",
+                  marginTop: "20px",
+                  marginBottom: "20px",
+                }}
+              />
+              <TextField
+                required
+                label="views"
+                variant="standard"
+                name="views"
                 type="text"
                 style={{
                   width: "100%",
@@ -218,7 +253,7 @@ const Navbar = () => {
                   backgroundColor: "green",
                   width: "100%",
                   marginTop: "20px",
-                  background: "#e63946",
+                  background: "#006c6e",
                 }}
               >
                 UPLOAD
