@@ -14,6 +14,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { useRouter } from "next/router";
 import style from "../styles/header.module.css";
+import axios from "axios";
 
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
@@ -27,6 +28,19 @@ const Navbar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const router = useRouter();
+  const [user, setUser] = React.useState<any>();
+  React.useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("user") || "user"));
+  }, []);
+  function logoutHandler(e: any) {
+    e.preventDefault();
+    window.localStorage.removeItem("user");
+    window.location.reload();
+  }
+
+  // UPLOAD, SEARCH
   const searchHandler = (e: any) => {
     e.preventDefault();
     console.log(e.target.search.value);
@@ -41,30 +55,31 @@ const Navbar = () => {
 
   const handleUploadSelect = (e: any) => {
     e.preventDefault();
-    // console.log(e.target[0].value);
-    const video = e.target[0].value;
-    const title = e.target.title.value;
-    console.log(video);
-    console.log(title);
-  };
+    let formData = new FormData();
+    formData.append("video", e.target[0].value);
+    formData.append("title", e.target.title.value);
+    formData.append("description", e.target.description.value);
+    formData.append("genre", e.target.genre.value);
+    formData.append("views", e.target.views.value);
+    formData.append("userId", user?.user._id);
+    axios({
+      method: "post",
+      url: "http://localhost:3001/v1/media/upload",
+      data: formData,
 
-  const router = useRouter();
-  const [user, setUser] = React.useState<any>();
-  React.useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("user") || "user"));
-  }, []);
-  function logoutHandler(e: any) {
-    e.preventDefault();
-    window.localStorage.removeItem("user");
-    window.location.reload();
-  }
+      headers: { "Content-Type": "multipart/form-data" },
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   return (
     <>
-
-
       <AppBar sx={{ backgroundColor: "#006c6e" }}>
-
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Typography
@@ -122,6 +137,7 @@ const Navbar = () => {
                 style={{ width: "50px", marginRight: "10px" }}
               />
             </Box>
+
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton
@@ -191,6 +207,7 @@ const Navbar = () => {
               onSubmit={handleUploadSelect}
               noValidate
               autoComplete="off"
+              encType="multipart/form-data"
             >
               <input
                 accept="video/*"
@@ -201,9 +218,45 @@ const Navbar = () => {
 
               <TextField
                 required
-                defaultValue="Hello World"
+                label="Title"
                 variant="standard"
                 name="title"
+                type="text"
+                style={{
+                  width: "100%",
+                  marginTop: "20px",
+                  marginBottom: "20px",
+                }}
+              />
+              <TextField
+                required
+                label="description"
+                variant="standard"
+                name="description"
+                type="text"
+                style={{
+                  width: "100%",
+                  marginTop: "20px",
+                  marginBottom: "20px",
+                }}
+              />
+              <TextField
+                required
+                label="genre"
+                variant="standard"
+                name="genre"
+                type="text"
+                style={{
+                  width: "100%",
+                  marginTop: "20px",
+                  marginBottom: "20px",
+                }}
+              />
+              <TextField
+                required
+                label="views"
+                variant="standard"
+                name="views"
                 type="text"
                 style={{
                   width: "100%",
@@ -218,7 +271,7 @@ const Navbar = () => {
                   backgroundColor: "green",
                   width: "100%",
                   marginTop: "20px",
-                  background: "#e63946",
+                  background: "#006c6e",
                 }}
               >
                 UPLOAD
