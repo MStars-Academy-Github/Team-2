@@ -21,7 +21,7 @@ export const createMedia = async (req: Request, res: Response) => {
       });
     }
 
-    const user = await User.findById("630ec6b19da3aa3e2f95d8f7");
+    const user = await User.findById("630ee09a762c9a964534cd4d");
     console.log(user);
 
     let media = new Media(fields);
