@@ -61,7 +61,10 @@ const Navbar = () => {
 
   return (
     <>
+
+
       <AppBar sx={{ backgroundColor: "#006c6e" }}>
+
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Typography
@@ -126,7 +129,7 @@ const Navbar = () => {
                   sx={{ p: 0, textTransform: "uppercase" }}
                 >
                   <Avatar alt="Remy Sharp">
-                    {user && user.user.email.slice(0, 1)}
+                    {/* {user && user.user.email.slice(0, 1)} */}
                   </Avatar>
                 </IconButton>
               </Tooltip>
