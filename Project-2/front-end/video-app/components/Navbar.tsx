@@ -61,7 +61,10 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar sx={{ backgroundColor: "#212529", boxShadow: "none" }}>
+
+
+      <AppBar sx={{ backgroundColor: "#006c6e" }}>
+
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Typography
@@ -79,27 +82,9 @@ const Navbar = () => {
                 textDecoration: "none",
               }}
             >
-              LOGO
+              Video Streaming App
             </Typography>
 
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href=""
-              sx={{
-                mr: 2,
-                display: { xs: "flex", md: "none" },
-                flexGrow: 1,
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              LOGO
-            </Typography>
             <Box sx={{ flexGrow: 1 }}></Box>
             <Box
               component="form"
