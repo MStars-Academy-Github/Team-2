@@ -8,6 +8,7 @@ export interface IMedia {
   postedBy: Schema.Types.ObjectId;
   updated: Date;
   created: Date;
+  userId: string;
 }
 
 export interface IMediaDoc extends IMedia, Document {}

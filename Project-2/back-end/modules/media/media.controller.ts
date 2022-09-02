@@ -20,16 +20,13 @@ export const createMedia = async (req: Request, res: Response) => {
         error: "Video could not be uploaded",
       });
     }
-
-    const user = await User.findById("630ee09a762c9a964534cd4d");
-    console.log(user);
-
     let media = new Media(fields);
-    media.postedBy = user?._id;
+    const user = await User.findById(media.userId);
+    // console.log(user);
 
+    media.postedBy = user?._id;
     const file = files["video"];
-    console.log(file);
-    console.log(media);
+    // console.log(file);
 
     //save the parse file
     if (file) {
