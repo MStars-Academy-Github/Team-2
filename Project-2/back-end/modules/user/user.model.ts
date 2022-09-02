@@ -55,4 +55,5 @@ userSchema.pre("save", async function (next) {
 });
 
 const User = mongoose.model<IUserDoc>("User", userSchema);
+
 export default User;

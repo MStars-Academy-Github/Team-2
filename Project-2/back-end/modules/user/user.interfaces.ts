@@ -1,4 +1,4 @@
-import mongoose, { Model, Document } from "mongoose";
+import mongoose, { Model, Document, ObjectId } from "mongoose";
 
 export interface IUser {
   firstName: string;
