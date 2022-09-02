@@ -19,8 +19,9 @@ export default function Layout({ children }: PropsWithChildren) {
       <div
         style={{
           display: "flex",
-          marginTop: "60px",
+          marginTop: "76px",
           width: "100vw",
+          height: "100vh",
           justifyContent: "space-between",
         }}
       >
