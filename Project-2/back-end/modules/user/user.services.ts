@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import { IUserDoc } from "./user.interfaces";
 import User from "./user.model";
 
