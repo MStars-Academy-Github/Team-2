@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import * as mediaService from "./media.services";
 import formidable, { Fields } from "formidable";
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 import Media from "./media.model";
 import { User } from "../user";
 import { GridFSBucket } from "mongodb";
@@ -48,5 +48,38 @@ export const createMedia = async (req: Request, res: Response) => {
         error: "Error during upload",
       });
     }
+  });
+};
+export const getMediaById = async (req: Request, res: Response) => {
+  const { mediaId } = req.params;
+  try {
+    const media = await Media.findById(mediaId)
+      .populate("postedBy", "_id firstName lastName")
+      .exec();
+    res.json({
+      data: media,
+    });
+  } catch (error) {
+    return res.status(404).json({
+      error: "Colud not retrieve media file",
+    });
+  }
+
+  res.json({ data: "Get media by id" });
+};
+export const getMediaByUserId = async (req: Request, res: Response) => {
+  const { userId } = req.params;
+  try {
+    const media = await Media.find({ postedBy: userId });
+    res.status(200).json({
+      data: media,
+    });
+  } catch (error) {
+    return res.status(404).json({
+      error: "Colud not retrieve media file",
+    });
+  }
+  res.json({
+    data: "Get media by user id",
   });
 };

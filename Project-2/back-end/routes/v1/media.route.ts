@@ -3,6 +3,7 @@ import { mediaController } from "../../modules/media";
 
 const router: Router = express.Router();
 
-// router.get("/", mediaController.getMedia);
+router.get("/video/:mediaId", mediaController.getMediaById);
 router.post("/upload", mediaController.createMedia);
+router.get("/video/by/:userId", mediaController.getMediaByUserId);
 export default router;
