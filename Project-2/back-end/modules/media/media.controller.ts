@@ -56,8 +56,12 @@ export const getMediaById = async (req: Request, res: Response) => {
     const media = await Media.findById(mediaId)
       .populate("postedBy", "_id firstName lastName")
       .exec();
+    let files = await gridfs
+      .find({ filename: media?._id.toString() })
+      .toArray();
     res.json({
       data: media,
+      file: files,
     });
   } catch (error) {
     return res.status(404).json({
