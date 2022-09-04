@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Button, TextField } from "@mui/material";
 import axios from "axios";
 import styles from "../styles/login.module.css";
+import "animate.css";
 
 type Props = {};
 
@@ -60,6 +61,11 @@ export default function Login({}: Props) {
   return (
     <div className={styles.back}>
       <div className={styles.bg1}>
+        <h1 className={styles.h1}>
+          <span className="animate__animated animate__bounce">
+            Video Streaming App
+          </span>
+        </h1>
         {register === false ? (
           <Box
             component="form"

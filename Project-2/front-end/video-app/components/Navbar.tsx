@@ -31,9 +31,11 @@ const Navbar = () => {
 
   const router = useRouter();
   const [user, setUser] = React.useState<any>();
+
   React.useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("user") || "user"));
   }, []);
+
   function logoutHandler(e: any) {
     e.preventDefault();
     window.localStorage.removeItem("user");
@@ -80,54 +82,52 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar sx={{ backgroundColor: "#006c6e" }}>
-        <Container maxWidth="xl">
-          <Toolbar disableGutters>
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              Video Streaming App
-            </Typography>
+      <AppBar sx={{ backgroundColor: "#006c6e", padding: "0 50px 0 50px" }}>
+        <Toolbar disableGutters>
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            Video Streaming App
+          </Typography>
 
-            <Box sx={{ flexGrow: 1 }}></Box>
-            <Box
-              component="form"
-              sx={{ flexGrow: 1, marginRight: "10px" }}
-              onSubmit={searchHandler}
-            >
-              <TextField
-                label="Search"
-                type="search"
-                name="search"
-                style={{
-                  color: "white",
-                  backgroundColor: "white",
-                  margin: "10px",
-                  width: "50%",
-                  marginRight: "50px",
-                  borderRadius: "5px",
-                  border: "none",
-                }}
-              />
-            </Box>
+          {/* <Box sx={{ flexGrow: 1 }}></Box> */}
+          <Box
+            component="form"
+            sx={{ flexGrow: 1, marginRight: "10px" }}
+            onSubmit={searchHandler}
+          >
+            <TextField
+              label="Search"
+              type="search"
+              name="search"
+              style={{
+                color: "white",
+                backgroundColor: "white",
+                margin: "10px",
+                width: "60%",
+                marginRight: "50px",
+                borderRadius: "5px",
+                border: "none",
+              }}
+            />
+          </Box>
+          <div className={style.flex}>
             <Box
               sx={{
-                flexGrow: 0,
                 background: "none",
                 border: "none",
-                marginTop: "5px",
               }}
               component="button"
               onClick={handleOpenUpload}
@@ -138,7 +138,6 @@ const Navbar = () => {
                 style={{ width: "50px", marginRight: "10px" }}
               />
             </Box>
-
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton
@@ -164,19 +163,14 @@ const Navbar = () => {
                   horizontal: "right",
                 }}
                 open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
               >
-                <MenuItem onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">Profile edit</Typography>
-                </MenuItem>
-
                 <MenuItem onClick={logoutHandler}>
                   <Typography textAlign="center">Sing out</Typography>
                 </MenuItem>
               </Menu>
             </Box>
-          </Toolbar>
-        </Container>
+          </div>
+        </Toolbar>
       </AppBar>
       {/* upload modal */}
       <Modal
@@ -191,7 +185,7 @@ const Navbar = () => {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: 400,
+            width: 500,
             bgcolor: "background.paper",
             boxShadow: 24,
             p: 4,

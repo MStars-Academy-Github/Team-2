@@ -4,7 +4,7 @@ import * as userService from "./user.services";
 import bcrypt from "bcryptjs";
 
 export const createUser = async (req: Request, res: Response) => {
-  console.log(req.body);
+  // console.log(req.body);
   const user = await userService.createUser(req.body);
   res.send(user);
 };
@@ -12,7 +12,6 @@ export const createUser = async (req: Request, res: Response) => {
 export const updateUser = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { firstName, lastName, email, phone, register, password } = req.body;
-
   try {
     const hashedPassword = await bcrypt.hash(password, 8);
     const user = await User.updateOne(
