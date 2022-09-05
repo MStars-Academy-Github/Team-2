@@ -21,12 +21,12 @@ export const createMedia = async (req: Request, res: Response) => {
         error: "Video could not be uploaded",
       });
     }
+
     let media = new Media(fields);
     const user = await User.findById(media.userId);
-
     media.postedBy = user?._id;
     const file = files["video"];
-
+    // console.log(media);
     //save the parse file
     if (file) {
       let writeStream = gridfs.openUploadStream(media._id.toString(), {
@@ -52,10 +52,17 @@ export const getMediaById = async (req: Request, res: Response) => {
     const media = await Media.findById(mediaId)
       .populate("postedBy", "_id firstName lastName")
       .exec();
+    console.log(media);
+
     let files = await gridfs
-      .find({ filename: media?._id.toString() })
+      .find({
+        filename: media?._id.toString(),
+      })
       .toArray();
+    console.log(files);
+
     let file = files[0];
+
     res.header("Content-Length", file.length.toString());
     res.header("Content-Type", file.contentType);
 
