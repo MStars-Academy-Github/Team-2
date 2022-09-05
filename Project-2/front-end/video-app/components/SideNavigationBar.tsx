@@ -22,7 +22,12 @@ export default function SideNavigationBar() {
     >
       <Link href="/">
         <Button
-          style={{ display: "flex", flexDirection: "column", color: "#fffcf2" }}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            color: "#fffcf2",
+            marginTop: "5px",
+          }}
         >
           <HomeIcon />
           Home
@@ -30,7 +35,12 @@ export default function SideNavigationBar() {
       </Link>
       <Link href={`/profile/${user?.user._id}`}>
         <Button
-          style={{ display: "flex", flexDirection: "column", color: "#fffcf2" }}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            color: "#fffcf2",
+            marginTop: "10px",
+          }}
         >
           <PersonIcon />
           Profile
@@ -38,7 +48,12 @@ export default function SideNavigationBar() {
       </Link>
       <Link href={`/edit/${user?.user._id}`}>
         <Button
-          style={{ display: "flex", flexDirection: "column", color: "#fffcf2" }}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            color: "#fffcf2",
+            marginTop: "10px",
+          }}
         >
           <SettingsIcon />
           Edit Profile
