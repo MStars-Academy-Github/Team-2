@@ -102,10 +102,9 @@ export default function Main() {
         <div className="grid grid-cols-4 gap-5">
           {media.map((video: any, i: number) => {
             return (
-              <div>
+              <div key={i}>
                 <p>{video.title}</p>
                 <ReactPlayer
-                  key={i}
                   url={`http://localhost:3001/v1/media/video/${video._id}`}
                   controls={true}
                   width="100%"

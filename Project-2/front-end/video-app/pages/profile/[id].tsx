@@ -25,9 +25,10 @@ export default function Id() {
       }}
       className="grid grid-cols-4 gap-4"
     >
-      {media.map((video: any) => {
+      {media.map((video: any, i: number) => {
         return (
           <ReactPlayer
+            key={i}
             url={`http://localhost:3001/v1/media/video/${video._id}`}
             controls={true}
             width="100%"
