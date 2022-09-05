@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -21,6 +21,15 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 const genre = ["Music", "Animation", "Gaming", "Entertainment", "Comedy"];
 
 const Navbar = () => {
+  const [values, setValues] = useState({
+    title: "",
+    video: "",
+    description: "",
+    genre: "",
+    redirect: false,
+    error: "",
+    mediaId: "",
+  });
   const [open, setOpen] = React.useState(false);
 
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
@@ -60,29 +69,37 @@ const Navbar = () => {
   const handleCloseUpload = () => {
     setOpen(false);
   };
-
+  const handleChange = (name: any) => (event: any) => {
+    console.log(name);
+    const value = name === "video" ? event.target.files[0] : event.target.value;
+    setValues({ ...values, [name]: value });
+  };
   const handleUploadSelect = (e: any) => {
     e.preventDefault();
     let formData = new FormData();
-    formData.append("video", e.target[0].value);
-    formData.append("title", e.target.title.value);
-    formData.append("description", e.target.description.value);
-    formData.append("genre", e.target.genre.value);
-    formData.append("userId", user?.user._id);
-    axios({
-      method: "post",
-      url: `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/media/upload`,
-      data: formData,
-      headers: { "Content-Type": "multipart/form-data" },
-    })
-      .then((res) => {
-        if (res.status == 200) {
-          alert("upload amjiltai hiigdlee");
-        }
+    if (user) {
+      console.log(values.video);
+      formData.append("video", values.video as any);
+      formData.append("title", e.target.title.value);
+      formData.append("description", e.target.description.value);
+      formData.append("genre", e.target.genre.value);
+      formData.append("userId", user?.user._id);
+
+      axios({
+        method: "post",
+        url: `http://localhost:3001/v1/media/upload`,
+        data: formData,
+        headers: { "Content-Type": "multipart/form-data" },
       })
-      .catch((err) => {
-        console.error(err);
-      });
+        .then((res) => {
+          if (res.status == 200) {
+            alert("upload amjiltai hiigdlee");
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
   };
 
   return (
@@ -211,9 +228,10 @@ const Navbar = () => {
             >
               <input
                 accept="video/*"
-                id="contained-button-file"
-                multiple
                 type="file"
+                onChange={handleChange("video")}
+                id="icon-button-file"
+                multiple
               />
 
               <TextField
@@ -240,18 +258,18 @@ const Navbar = () => {
                   marginBottom: "20px",
                 }}
               />
-              {/* <TextField
+              <TextField
                 required
-                label="genre"
+                label="views"
                 variant="standard"
-                name="genre"
+                name="views"
                 type="text"
                 style={{
                   width: "100%",
                   marginTop: "20px",
                   marginBottom: "20px",
                 }}
-              /> */}
+              />
               <FormControl sx={{ width: "100%", marginTop: "30px" }}>
                 <InputLabel id="demo-simple-select-label">Genre</InputLabel>
                 <Select

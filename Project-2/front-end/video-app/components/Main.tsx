@@ -7,7 +7,7 @@ import ReactPlayer from "react-player";
 export default function Main() {
   const [media, setMedia] = useState<any>([]);
   const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
-
+  console.log(media);
   useEffect(() => {
     axios.get("http://localhost:3001/v1/media").then((res) => {
       setMedia(res.data.data);
