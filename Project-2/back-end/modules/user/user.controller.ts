@@ -4,7 +4,6 @@ import * as userService from "./user.services";
 import bcrypt from "bcryptjs";
 
 export const createUser = async (req: Request, res: Response) => {
-  // console.log(req.body);
   const user = await userService.createUser(req.body);
   res.send(user);
 };
