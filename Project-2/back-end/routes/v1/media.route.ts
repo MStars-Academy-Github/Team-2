@@ -9,4 +9,6 @@ router.get("/video/by/:userId", mediaController.getMediaByUserId);
 router.get("/search/by/:title", mediaController.getMediaByTitle);
 router.delete("/delete/:id", mediaController.deleteMedia);
 router.put("/update/:id", mediaController.updateMedia);
+router.get("/by/:genre", mediaController.getMediaByGenre);
+router.get("/", mediaController.getMedia);
 export default router;

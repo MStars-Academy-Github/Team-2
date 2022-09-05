@@ -123,3 +123,26 @@ export const updateMedia = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const getMediaByGenre = async (req: Request, res: Response) => {
+  const { genre } = req.params;
+  try {
+    const media = await Media.find({ genre: { $regex: genre, $options: "i" } });
+    await res.status(200).json({ data: media });
+  } catch (error) {
+    return res.status(404).json({
+      error: "Colud not delete media",
+    });
+  }
+};
+
+export const getMedia = async (req: Request, res: Response) => {
+  try {
+    const media = await Media.find();
+    await res.status(200).json({ data: media });
+  } catch (error) {
+    return res.status(404).json({
+      error: "Colud not delete media",
+    });
+  }
+};
