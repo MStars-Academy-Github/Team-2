@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import ReactPlayer from "react-player";
+import TopNavigationBar from "./TopNavigationBar";
 
 type Props = {};
 let media = [
@@ -25,24 +26,29 @@ export default function Main({}: Props) {
   const router = useRouter();
   return (
     <div
-      style={{
-        backgroundColor: "#343a40",
-        height: "100vh",
-        padding: "30px",
-      }}
+      style={
+        {
+          // backgroundColor: "#343a40",
+          // height: "100vh",
+        }
+      }
     >
+      <TopNavigationBar />
       <div className="grid grid-cols-4 gap-5">
         {media.map((video, i) => {
           return (
-            <ReactPlayer
-              key={i}
-              url={video}
-              width="100%"
-              height="100%"
-              onPlay={() => {
-                router.push(`/watch?video=${video}`);
-              }}
-            />
+            <div>
+              <ReactPlayer
+                key={i}
+                url={video}
+                width="100%"
+                height="100%"
+                onPlay={() => {
+                  router.push(`/watch?video=${video}`);
+                }}
+              />
+              <p>Billie Eilish</p>
+            </div>
           );
         })}
       </div>

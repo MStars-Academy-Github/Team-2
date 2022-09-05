@@ -36,7 +36,7 @@ export default function Id() {
   return (
     <div
       style={{
-        backgroundColor: "#343a40",
+        // backgroundColor: "#343a40",
         height: "90vh",
         padding: "30px",
         color: "white",

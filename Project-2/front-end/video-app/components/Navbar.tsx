@@ -15,6 +15,10 @@ import MenuItem from "@mui/material/MenuItem";
 import { useRouter } from "next/router";
 import style from "../styles/header.module.css";
 import axios from "axios";
+import { FormControl, InputLabel } from "@mui/material";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+
+const genre = ["Music", "Animation", "Gaming", "Entertainment", "Comedy"];
 
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
@@ -31,8 +35,7 @@ const Navbar = () => {
 
   const router = useRouter();
   const [user, setUser] = React.useState<any>();
-  const [search, setSearch] = React.useState<any>();
-  console.log(search);
+
   React.useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("user") || "user"));
   }, []);
@@ -47,7 +50,7 @@ const Navbar = () => {
 
   const searchHandler = (e: any) => {
     e.preventDefault();
-    setSearch(e.target.search.value);
+    router.push(`/search/${e.target.search.value}`);
   };
 
   const handleOpenUpload = () => {
@@ -65,7 +68,6 @@ const Navbar = () => {
     formData.append("title", e.target.title.value);
     formData.append("description", e.target.description.value);
     formData.append("genre", e.target.genre.value);
-    formData.append("views", e.target.views.value);
     formData.append("userId", user?.user._id);
     axios({
       method: "post",
@@ -238,7 +240,7 @@ const Navbar = () => {
                   marginBottom: "20px",
                 }}
               />
-              <TextField
+              {/* <TextField
                 required
                 label="genre"
                 variant="standard"
@@ -249,19 +251,26 @@ const Navbar = () => {
                   marginTop: "20px",
                   marginBottom: "20px",
                 }}
-              />
-              <TextField
-                required
-                label="views"
-                variant="standard"
-                name="views"
-                type="text"
-                style={{
-                  width: "100%",
-                  marginTop: "20px",
-                  marginBottom: "20px",
-                }}
-              />
+              /> */}
+              <FormControl sx={{ width: "100%", marginTop: "30px" }}>
+                <InputLabel id="demo-simple-select-label">Genre</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  // value={age}
+                  label="genre"
+                  name="genre"
+                >
+                  {genre.map((genre: any, i: number) => {
+                    return (
+                      <MenuItem key={i} value={genre}>
+                        {genre}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+
               <Button
                 type="submit"
                 variant="contained"

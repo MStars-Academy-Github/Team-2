@@ -49,8 +49,6 @@ export default function User() {
           alignItems: "center",
           color: "white !important",
           // backgroundColor: "#20ab9c",
-
-          background: " rgba(255, 255, 255, 0.2)",
         }}
         noValidate
         autoComplete="off"
