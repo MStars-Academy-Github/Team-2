@@ -6,6 +6,7 @@ import Media from "./media.model";
 import { User } from "../user";
 import { GridFSBucket } from "mongodb";
 import fs from "fs";
+import router from "../../routes/v1";
 
 let gridfs: GridFSBucket;
 mongoose.connection.on("connected", () => {
@@ -65,8 +66,6 @@ export const getMediaById = async (req: Request, res: Response) => {
       error: "Colud not retrieve media file",
     });
   }
-
-  res.json({ data: "Get media by id" });
 };
 export const getMediaByUserId = async (req: Request, res: Response) => {
   const { userId } = req.params;
@@ -80,9 +79,6 @@ export const getMediaByUserId = async (req: Request, res: Response) => {
       error: "Colud not retrieve media file",
     });
   }
-  res.json({
-    data: "Get media by user id",
-  });
 };
 
 export const getMediaByTitle = async (req: Request, res: Response) => {
@@ -96,6 +92,34 @@ export const getMediaByTitle = async (req: Request, res: Response) => {
       error: "Colud not retrieve media file",
     });
   }
+};
 
-  res.json({ data: "Get media by Title" });
+export const deleteMedia = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  try {
+    await Media.deleteOne({ _id: id });
+    await res.status(200).json("Deleted");
+  } catch (error) {
+    return res.status(404).json({
+      error: "Colud not delete media",
+    });
+  }
+};
+
+export const updateMedia = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { title, description, genre } = req.body;
+
+  try {
+    const media = await Media.updateOne(
+      { _id: id },
+      { $set: { title: title, description: description, genre: genre } }
+    );
+    await res.status(200).json({ data: media });
+  } catch (error) {
+    return res.status(404).json({
+      error: "Colud not delete media",
+    });
+  }
 };
