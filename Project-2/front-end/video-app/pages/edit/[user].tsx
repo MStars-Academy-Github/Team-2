@@ -8,7 +8,7 @@ export default function User() {
   const router = useRouter();
   const { user } = router.query;
   const [userEdit, setUserEdit] = React.useState<any>();
-  console.log(userEdit?.user);
+
   React.useEffect(() => {
     setUserEdit(JSON.parse(localStorage.getItem("user") || "user"));
   }, []);
@@ -36,7 +36,7 @@ export default function User() {
         }
       });
   }
-  console.log(userEdit && userEdit?.user.email);
+
   return (
     <div>
       <Box
@@ -49,8 +49,6 @@ export default function User() {
           alignItems: "center",
           color: "white !important",
           // backgroundColor: "#20ab9c",
-
-          background: " rgba(255, 255, 255, 0.2)",
         }}
         noValidate
         autoComplete="off"

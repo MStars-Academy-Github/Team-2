@@ -30,14 +30,13 @@ export default function Id() {
       setUser(JSON.parse(localStorage.getItem("user") || "user"));
     }
   }, [id]);
-
   console.log(media);
   console.log(video);
 
   return (
     <div
       style={{
-        backgroundColor: "#343a40",
+        // backgroundColor: "#343a40",
         height: "90vh",
         padding: "30px",
         color: "white",

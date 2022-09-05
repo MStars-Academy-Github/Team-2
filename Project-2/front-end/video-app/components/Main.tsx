@@ -2,6 +2,7 @@ import { Button } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
+import TopNavigationBar from "./TopNavigationBar";
 
 export default function Main() {
   const [media, setMedia] = useState();
