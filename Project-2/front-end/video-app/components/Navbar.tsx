@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -31,7 +31,8 @@ const Navbar = () => {
 
   const router = useRouter();
   const [user, setUser] = React.useState<any>();
-
+  const [search, setSearch] = React.useState<any>();
+  console.log(search);
   React.useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("user") || "user"));
   }, []);
@@ -43,10 +44,12 @@ const Navbar = () => {
   }
 
   // UPLOAD, SEARCH
+
   const searchHandler = (e: any) => {
     e.preventDefault();
-    console.log(e.target.search.value);
+    setSearch(e.target.search.value);
   };
+
   const handleOpenUpload = () => {
     setOpen(true);
   };
@@ -66,7 +69,7 @@ const Navbar = () => {
     formData.append("userId", user?.user._id);
     axios({
       method: "post",
-      url: "http://localhost:3001/v1/media/upload",
+      url: `${process.env.NEXT_PUBLIC_SERVER_URL}/v1/media/upload`,
       data: formData,
       headers: { "Content-Type": "multipart/form-data" },
     })

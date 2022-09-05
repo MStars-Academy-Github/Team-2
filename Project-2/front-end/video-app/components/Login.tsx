@@ -12,7 +12,6 @@ export default function Login({}: Props) {
 
   function loginHandler(e: any) {
     e.preventDefault();
-
     axios
       .post("http://localhost:3001/v1/auth/login", {
         email: e.target.email.value,
