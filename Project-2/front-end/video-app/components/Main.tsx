@@ -15,34 +15,6 @@ export default function Main() {
   }, []);
 
   return (
-<<<<<<< HEAD
-    <div
-      style={
-        {
-          // backgroundColor: "#343a40",
-          // height: "100vh",
-        }
-      }
-    >
-      <TopNavigationBar />
-      <div className="grid grid-cols-4 gap-5">
-        {media.map((video, i) => {
-          return (
-            <div>
-              <ReactPlayer
-                key={i}
-                url={video}
-                width="100%"
-                height="100%"
-                onPlay={() => {
-                  router.push(`/watch?video=${video}`);
-                }}
-              />
-              <p>Billie Eilish</p>
-            </div>
-          );
-        })}
-=======
     <>
       <div className="p-2 flex gap-4 ">
         <Button
@@ -128,7 +100,6 @@ export default function Main() {
         }}
       >
         <div className="grid grid-cols-4 gap-5"></div>
->>>>>>> f225d181c592e90f04f0d25a1318ce3a40f263f7
       </div>
     </>
   );
