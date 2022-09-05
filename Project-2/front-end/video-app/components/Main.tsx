@@ -1,11 +1,12 @@
 import { Button } from "@mui/material";
 import axios from "axios";
+import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 
 export default function Main() {
-  const [media, setMedia] = useState();
-  console.log(media);
+  const [media, setMedia] = useState<any>([]);
+  const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
   useEffect(() => {
     axios.get("http://localhost:3001/v1/media").then((res) => {
@@ -98,7 +99,26 @@ export default function Main() {
           padding: "30px",
         }}
       >
-        <div className="grid grid-cols-4 gap-5"></div>
+        <div className="grid grid-cols-4 gap-5">
+          {media.map((video: any, i: number) => {
+            return (
+              <div>
+                <p>{video.title}</p>
+                <ReactPlayer
+                  key={i}
+                  url={`http://localhost:3001/v1/media/video/${video._id}`}
+                  controls={true}
+                  width="100%"
+                  height="fit-content"
+                />
+                <Button>Edit</Button>
+                <Button>Delete</Button>
+                <p>{video.views}</p>
+                <p>{video.description}</p>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </>
   );

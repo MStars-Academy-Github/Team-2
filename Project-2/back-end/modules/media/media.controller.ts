@@ -23,11 +23,9 @@ export const createMedia = async (req: Request, res: Response) => {
     }
     let media = new Media(fields);
     const user = await User.findById(media.userId);
-    // console.log(user);
 
     media.postedBy = user?._id;
     const file = files["video"];
-    // console.log(file);
 
     //save the parse file
     if (file) {
@@ -57,9 +55,17 @@ export const getMediaById = async (req: Request, res: Response) => {
     let files = await gridfs
       .find({ filename: media?._id.toString() })
       .toArray();
-    res.json({
-      data: media,
-      file: files,
+    let file = files[0];
+    res.header("Content-Length", file.length.toString());
+    res.header("Content-Type", file.contentType);
+
+    let downloadStream = gridfs.openDownloadStream(file._id);
+    downloadStream.pipe(res);
+    downloadStream.on("error", () => {
+      res.sendStatus(404);
+    });
+    downloadStream.on("end", () => {
+      res.end();
     });
   } catch (error) {
     return res.status(404).json({
@@ -99,7 +105,6 @@ export const deleteMedia = async (req: Request, res: Response) => {
 
   try {
     await Media.deleteOne({ _id: id });
-    await res.status(200).json("Deleted");
   } catch (error) {
     return res.status(404).json({
       error: "Colud not delete media",
