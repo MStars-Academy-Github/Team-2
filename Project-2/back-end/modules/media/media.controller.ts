@@ -109,9 +109,10 @@ export const getMediaByTitle = async (req: Request, res: Response) => {
 
 export const deleteMedia = async (req: Request, res: Response) => {
   const { id } = req.params;
-
+  // console.log(id);
   try {
-    await Media.deleteOne({ _id: id });
+    const dltVideo = await Media.deleteOne({ _id: id });
+    await res.status(200).json({ dltVideo });
   } catch (error) {
     return res.status(404).json({
       error: "Colud not delete media",
