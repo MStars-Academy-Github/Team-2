@@ -5,7 +5,7 @@ import ReactPlayer from "react-player";
 export default function watch() {
   const router = useRouter();
   const { video } = router.query;
-  console.log(video);
+
   return (
     <div
       style={{
