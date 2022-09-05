@@ -7,3 +7,6 @@ export const createUser = async (body: any) => {
 
 export const getUserByEmail = async (email: string): Promise<IUserDoc | null> =>
   User.findOne({ email });
+
+export const getUserById = async (id: string): Promise<IUserDoc | null> =>
+  User.findById({ id });

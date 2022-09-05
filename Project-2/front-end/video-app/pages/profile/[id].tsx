@@ -47,9 +47,9 @@ export default function Id() {
           {user?.user.firstName} {user?.user.lastName}
         </h1>
       </div>
-      {/* {video.map((e: any) => {
+      {video?.map((e: any) => {
         console.log(e.file[0]);
-      })} */}
+      })}
     </div>
   );
 }
