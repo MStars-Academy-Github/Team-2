@@ -84,3 +84,18 @@ export const getMediaByUserId = async (req: Request, res: Response) => {
     data: "Get media by user id",
   });
 };
+
+export const getMediaByTitle = async (req: Request, res: Response) => {
+  const { title } = req.params;
+
+  try {
+    const media = await Media.find({ title: { $regex: title, $options: "i" } });
+    await res.status(200).json({ data: media });
+  } catch (error) {
+    return res.status(404).json({
+      error: "Colud not retrieve media file",
+    });
+  }
+
+  res.json({ data: "Get media by Title" });
+};
