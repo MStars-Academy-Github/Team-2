@@ -40,3 +40,17 @@ export const updateUser = async (req: Request, res: Response) => {
     data: "update user",
   });
 };
+
+export const getUserById = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const user = await User.findById(id);
+    await res.status(200).json({ data: user });
+  } catch (error) {
+    return res.status(404).json({
+      error: "Colud not retrieve user",
+    });
+  }
+
+  res.json({ data: "Get user by id" });
+};
