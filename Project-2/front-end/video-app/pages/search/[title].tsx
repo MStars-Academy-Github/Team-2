@@ -25,7 +25,7 @@ export default function Title() {
       {media &&
         media.map((video: any) => (
           <ReactPlayer
-            url={`${process.env.NEXT_PUBLIC_SERVER_URL}/v1/video/by/${video._id}`}
+            url={`${process.env.NEXT_PUBLIC_SERVER_URL}/v1/media/video/${video._id}`}
             width="100%"
             height={"inherit"}
             controls={true}
