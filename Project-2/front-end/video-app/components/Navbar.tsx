@@ -45,9 +45,11 @@ const Navbar = () => {
   React.useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("user") || "user"));
   }, []);
-  React.useEffect(() => {
-    setLike(JSON.parse(localStorage.getItem("like") || "like"));
-  }, []);
+  if (localStorage.getItem("like")) {
+    React.useEffect(() => {
+      setLike(JSON.parse(localStorage.getItem("like") || "like"));
+    }, []);
+  }
 
   function logoutHandler(e: any) {
     e.preventDefault();
