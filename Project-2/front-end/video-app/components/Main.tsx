@@ -122,7 +122,7 @@ export default function Main() {
                   onClick={() => handlerOpenVideo(video._id)}
                 />
 
-                <div className="text-white">
+                <div className="text-white ">
                   <div className="flex items-start p-2 gap-2">
                     <div>
                       {users.map((user: any) => {
@@ -169,7 +169,6 @@ export default function Main() {
                     </div>
                   </div>
                 </div>
-                <div className="flex  text-white justify-around "></div>
               </div>
             );
           })}
