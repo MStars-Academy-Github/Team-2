@@ -11,8 +11,8 @@ export default function Layout({ children }: PropsWithChildren) {
         flexDirection: "column",
         justifyContent: "space-between",
         alignItems: "center",
-        height: "100vh",
-        maxWidth: "100vw",
+        minWidth: "100vw",
+        minHeight: "100vh",
       }}
     >
       <Navbar />
@@ -21,7 +21,6 @@ export default function Layout({ children }: PropsWithChildren) {
           display: "flex",
           marginTop: "76px",
           width: "100vw",
-          height: "100vh",
           justifyContent: "space-between",
         }}
       >

@@ -106,7 +106,7 @@ export default function Main() {
       <div
         style={{
           backgroundColor: "#343a40",
-          height: "85vh",
+          minHeight: "85vh",
           padding: "30px",
         }}
       >
