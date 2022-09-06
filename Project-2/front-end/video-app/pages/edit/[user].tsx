@@ -47,14 +47,16 @@ export default function User() {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          color: "white !important",
-          // backgroundColor: "#20ab9c",
+          color: "white",
         }}
         noValidate
         autoComplete="off"
         onSubmit={handleUpdate}
       >
-        <div className={styles.bg2}>
+        <div
+          className="w-[25vw] rounded"
+          style={{ backgroundColor: "#20ab9c", padding: "40px" }}
+        >
           <TextField
             required
             label="Email"

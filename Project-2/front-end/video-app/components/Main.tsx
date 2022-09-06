@@ -1,23 +1,29 @@
-import { Button } from "@mui/material";
+import { Avatar, Button } from "@mui/material";
 import axios from "axios";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import moment from "moment";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 const genre = ["Music", "Animation", "Gaming", "Entertainment", "Comedy"];
 export default function Main() {
   const router = useRouter();
   const [media, setMedia] = useState<any>([]);
+  const [users, setUsers] = useState<any>([]);
   useEffect(() => {
     axios.get("http://localhost:3001/v1/media").then((res) => {
       setMedia(res.data.data);
+    });
+    axios.get("http://localhost:3001/v1/users").then((res) => {
+      setUsers(res.data.data);
     });
   }, []);
   const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
   function handlerOpenVideo(id: any) {
     router.push(`/watch?video=${id}`);
   }
+  console.log(users);
 
   return (
     <>
@@ -111,20 +117,55 @@ export default function Main() {
                 <ReactPlayer
                   url={`http://localhost:3001/v1/media/video/${video._id}`}
                   controls={true}
-                  width="100%"
-                  height="fit-content"
+                  width="20vw"
+                  height="20vh"
                   onClick={() => handlerOpenVideo(video._id)}
                 />
 
                 <div className="text-white">
                   <div className="flex items-start p-2 gap-2">
-                    <img src="/favicon.ico" alt="" width="40px" />
                     <div>
-                      <p style={{ fontSize: "18px" }}>{video.title}</p>
-                      <p className="text-gray-400 text-[14px]">
-                        Views {video.views} &#8226;{" "}
-                        {moment(video.created).format("MMM DD,YYYY")}
-                      </p>
+                      {users.map((user: any) => {
+                        if (user._id === video.postedBy) {
+                          return (
+                            <div className="flex gap-3">
+                              <Avatar
+                                alt="Remy Sharp"
+                                style={{
+                                  backgroundColor:
+                                    "rgb(" +
+                                    Math.floor(Math.random() * 255) +
+                                    "," +
+                                    Math.floor(Math.random() * 255) +
+                                    "," +
+                                    Math.floor(Math.random() * 255) +
+                                    ")",
+                                }}
+                              >
+                                {user.firstName.slice(0, 1)}
+                              </Avatar>
+                              <div>
+                                <p style={{ fontSize: "18px" }}>
+                                  {video.title}
+                                </p>
+
+                                <p className="text-gray-400 text-[14px] flex items-center">
+                                  {user.firstName}
+
+                                  <CheckCircleIcon
+                                    className="text-[14px] ml-1"
+                                    color="info"
+                                  />
+                                </p>
+                                <p className="text-gray-400 text-[14px]">
+                                  Views {video.views} &#8226;{" "}
+                                  {moment(video.created).format("MMM DD,YYYY")}
+                                </p>
+                              </div>
+                            </div>
+                          );
+                        }
+                      })}
                     </div>
                   </div>
                 </div>

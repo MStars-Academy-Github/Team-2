@@ -9,4 +9,6 @@ router.post("/update/:id", userController.updateUser);
 
 router.get("/:id", userController.getUserById);
 
+router.get("/", userController.getUsers);
+
 export default router;
