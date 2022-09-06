@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import axios from "axios";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
@@ -24,24 +25,26 @@ export default function Title() {
     router.push(`/watch?video=${id}`);
   }
   return (
-    <div>
-      {/* {title} */}
-      <p className="p-6 text-white">
-        Таны хайлт : <span className="text-red text-2xl">{title}</span>
-      </p>
-      <div className="grid grid-cols-4 gap-5 p-6">
-        {media &&
-          media.map((video: any, i: number) => (
-            <ReactPlayer
-              key={i}
-              url={`http://localhost:3001/v1/media/video/${video._id}`}
-              width="100%"
-              height={"inherit"}
-              controls={true}
-              onClick={() => handlerOpenVideo(video._id)}
-            />
-          ))}
+    <>
+      <div style={{ backgroundColor: "#343a40", height: "100%" }}>
+        {/* {title} */}
+        <p className="p-6 text-white">
+          Таны хайлт : <span className="text-red text-2xl">{title}</span>
+        </p>
+        <div className="grid grid-cols-4 gap-5 p-6">
+          {media &&
+            media.map((video: any, i: number) => (
+              <ReactPlayer
+                key={i}
+                url={`http://localhost:3001/v1/media/video/${video._id}`}
+                width="100%"
+                height={"inherit"}
+                controls={true}
+                onClick={() => handlerOpenVideo(video._id)}
+              />
+            ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
