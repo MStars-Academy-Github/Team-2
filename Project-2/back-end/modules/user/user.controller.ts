@@ -35,9 +35,17 @@ export const updateUser = async (req: Request, res: Response) => {
       error: error,
     });
   }
-  res.json({
-    data: "update user",
-  });
+};
+
+export const getUsers = async (req: Request, res: Response) => {
+  try {
+    const user = await User.find();
+    await res.status(200).json({ data: user });
+  } catch (error) {
+    return res.status(404).json({
+      error: "Colud not retrieve user",
+    });
+  }
 };
 
 export const getUserById = async (req: Request, res: Response) => {
@@ -50,6 +58,4 @@ export const getUserById = async (req: Request, res: Response) => {
       error: "Colud not retrieve user",
     });
   }
-
-  res.json({ data: "Get user by id" });
 };

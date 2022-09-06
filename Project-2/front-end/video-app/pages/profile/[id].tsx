@@ -84,13 +84,15 @@ export default function Id({ mediaa }: any) {
   function handlerOpenVideo(id: any) {
     router.push(`/watch?video=${id}`);
   }
+  console.log(media.lenght);
 
   return (
     <div
       style={{
-        height: "90vh",
+        height: "100%",
         padding: "30px",
         color: "white",
+        backgroundColor: "#343a40",
       }}
       className="grid grid-cols-4 gap-4"
     >
@@ -106,19 +108,33 @@ export default function Id({ mediaa }: any) {
                 height="fit-content"
                 onClick={() => handlerOpenVideo(video._id)}
               />
+
               <div className="flex justify-between">
-                <Button
-                  sx={{ color: "white" }}
-                  onClick={() => handleOpen(video._id)}
-                >
-                  edit
-                </Button>
-                <Button
-                  sx={{ color: "white" }}
-                  onClick={() => handlerDlt(video._id)}
-                >
-                  delete
-                </Button>
+                <div>
+                  <p className="text-[20px]">{video.title}</p>
+                  <span className="text-[12px] text-[gray]">
+                    Views {video.views}
+                  </span>
+                </div>
+
+                <div className="flex gap-2 py-2">
+                  <Button
+                    variant="contained"
+                    color="info"
+                    className="bg-[#0288d1]"
+                    onClick={() => handleOpen(video._id)}
+                  >
+                    edit
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="error"
+                    className="bg-[#d32f2f]"
+                    onClick={() => handlerDlt(video._id)}
+                  >
+                    delete
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
