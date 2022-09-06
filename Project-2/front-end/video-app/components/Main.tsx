@@ -2,28 +2,22 @@ import { Button } from "@mui/material";
 import axios from "axios";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import ReactPlayer from "react-player";
 import { useRouter } from "next/router";
+import moment from "moment";
 
-// modal style
-
+const genre = ["Music", "Animation", "Gaming", "Entertainment", "Comedy"];
 export default function Main() {
   const router = useRouter();
-
   const [media, setMedia] = useState<any>([]);
-  const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
-  console.log(media);
-
   useEffect(() => {
     axios.get("http://localhost:3001/v1/media").then((res) => {
       setMedia(res.data.data);
     });
   }, []);
-
+  const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
   function handlerOpenVideo(id: any) {
     router.push(`/watch?video=${id}`);
   }
-  // edit delete
 
   return (
     <>
@@ -122,14 +116,19 @@ export default function Main() {
                   onClick={() => handlerOpenVideo(video._id)}
                 />
 
-                <div className="flex  text-white justify-around m-px">
-                  <p>Title:</p>
-                  <p>{video.title}</p>
+                <div className="text-white">
+                  <div className="flex items-start p-2 gap-2">
+                    <img src="/favicon.ico" alt="" width="40px" />
+                    <div>
+                      <p style={{ fontSize: "18px" }}>{video.title}</p>
+                      <p className="text-gray-400 text-[14px]">
+                        Views {video.views} &#8226;{" "}
+                        {moment(video.created).format("MMM DD,YYYY")}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex  text-white justify-around m-px">
-                  <p>Description:</p>
-                  <p>{video.description}</p>
-                </div>
+                <div className="flex  text-white justify-around "></div>
               </div>
             );
           })}
