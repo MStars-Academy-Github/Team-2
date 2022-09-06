@@ -59,3 +59,28 @@ export const getUserById = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const addPlaylist = async (req: Request, res: Response) => {
+  const { userId, mediaId } = req.body;
+  try {
+    const playlist = await User.findOne({
+      playlist: { $in: [mediaId] },
+    });
+    if (playlist === null) {
+      const user = await User.findByIdAndUpdate(userId, {
+        $push: {
+          playlist: mediaId,
+        },
+      });
+      res.status(200).json({
+        data: user,
+      });
+    } else {
+      res.json({ data: "Already exist" });
+    }
+  } catch (error) {
+    return res.status(404).json({
+      error: error,
+    });
+  }
+};

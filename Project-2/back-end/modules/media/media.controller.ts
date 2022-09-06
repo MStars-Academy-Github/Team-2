@@ -26,7 +26,7 @@ export const createMedia = async (req: Request, res: Response) => {
     const user = await User.findById(media.userId);
     media.postedBy = user?._id;
     const file = files["video"];
-    // console.log(media);
+
     //save the parse file
     if (file) {
       let writeStream = gridfs.openUploadStream(media._id.toString(), {
@@ -52,14 +52,12 @@ export const getMediaById = async (req: Request, res: Response) => {
     const media = await Media.findById(mediaId)
       .populate("postedBy", "_id firstName lastName")
       .exec();
-    console.log(media);
 
     let files = await gridfs
       .find({
         filename: media?._id.toString(),
       })
       .toArray();
-    console.log(files);
 
     let file = files[0];
 
@@ -109,7 +107,7 @@ export const getMediaByTitle = async (req: Request, res: Response) => {
 
 export const deleteMedia = async (req: Request, res: Response) => {
   const { id } = req.params;
-  // console.log(id);
+
   try {
     const dltVideo = await Media.deleteOne({ _id: id });
     await res.status(200).json({ dltVideo });

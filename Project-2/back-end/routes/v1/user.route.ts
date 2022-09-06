@@ -11,4 +11,6 @@ router.get("/:id", userController.getUserById);
 
 router.get("/", userController.getUsers);
 
+router.post("/playlist", userController.addPlaylist);
+
 export default router;

@@ -66,7 +66,6 @@ const Navbar = () => {
     setOpen(false);
   };
   const handleChange = (name: any) => (event: any) => {
-    console.log(name);
     const value = name === "video" ? event.target.files[0] : event.target.value;
     setValues({ ...values, [name]: value });
   };

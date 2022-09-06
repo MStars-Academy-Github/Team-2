@@ -84,7 +84,6 @@ export default function Id({ mediaa }: any) {
   function handlerOpenVideo(id: any) {
     router.push(`/watch?video=${id}`);
   }
-  console.log(media.lenght);
 
   return (
     <div

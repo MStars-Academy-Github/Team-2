@@ -22,7 +22,14 @@ export default function watch({ videoDesc }: any) {
   function handlerOpenVideo(id: any) {
     router.push(`/watch?video=${id}`);
   }
-  console.log(watchVideo);
+
+  function playlistHandler(id: string) {
+    const user = JSON.parse(localStorage.getItem("user") || "user");
+    axios.post("http://localhost:3001/v1/users/playlist", {
+      userId: user.user._id,
+      mediaId: id,
+    });
+  }
 
   return (
     <div
@@ -62,7 +69,12 @@ export default function watch({ videoDesc }: any) {
                 <ContentCutIcon />
                 CLIP
               </Button>
-              <Button className="gap-2">
+              <Button
+                className="gap-2"
+                onClick={() => {
+                  playlistHandler(watchVideo[0]._id);
+                }}
+              >
                 <WatchLaterIcon />
                 WATCH LATER
               </Button>
