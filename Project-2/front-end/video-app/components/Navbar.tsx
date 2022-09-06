@@ -52,7 +52,6 @@ const Navbar = () => {
   }
 
   // UPLOAD, SEARCH
-
   const searchHandler = (e: any) => {
     e.preventDefault();
     router.push(`/search/${e.target.search.value}`);
@@ -61,6 +60,7 @@ const Navbar = () => {
   const handleOpenUpload = () => {
     setOpen(true);
   };
+
   // modal upload
   const handleCloseUpload = () => {
     setOpen(false);
@@ -161,7 +161,7 @@ const Navbar = () => {
                   sx={{ p: 0, textTransform: "uppercase" }}
                 >
                   <Avatar alt="Remy Sharp">
-                    {/* {user && user.user.email.slice(0, 1)} */}
+                    {user && user.user.email.slice(0, 1)}
                   </Avatar>
                 </IconButton>
               </Tooltip>
