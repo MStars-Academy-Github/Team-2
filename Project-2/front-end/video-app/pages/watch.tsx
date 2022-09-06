@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { Button } from "@mui/material";
 import moment from "moment";
@@ -11,9 +11,12 @@ import ContentCutIcon from "@mui/icons-material/ContentCut";
 import WatchLaterIcon from "@mui/icons-material/WatchLater";
 
 export default function watch({ videoDesc }: any) {
+  const [user, setUser] = React.useState<any>();
   const router = useRouter();
   const { video } = router.query;
 
+  const [count, setCount] = useState(0);
+  console.log(count);
   const watchVideo = videoDesc.filter((videos: any) => {
     if (videos._id === video) {
       return videos;
@@ -23,6 +26,20 @@ export default function watch({ videoDesc }: any) {
     router.push(`/watch?video=${id}`);
   }
 
+  function handlerLike() {
+    videoDesc.filter((a: any, i: number) => {
+      if (a.postedBy === user?.user._id) {
+        setCount(count + 1);
+        window.localStorage.setItem("like", JSON.stringify(count));
+      }
+    });
+  }
+  console.log(user);
+  // console.log(video);
+  // console.log(videoDesc);
+  React.useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("user") || "user"));
+  }, []);
   function playlistHandler(id: string) {
     const user = JSON.parse(localStorage.getItem("user") || "user");
     axios.post("http://localhost:3001/v1/users/playlist", {
@@ -54,20 +71,20 @@ export default function watch({ videoDesc }: any) {
               <p>{moment(watchVideo[0].created).format("MMM DD,YYYY")}</p>
             </div>
             <div>
-              <Button className="gap-2">
-                <ThumbUpIcon /> LIKE
+              <Button className="gap-2" onClick={handlerLike}>
+                <ThumbUpIcon /> Like
               </Button>
               <Button className="gap-2">
                 <ThumbDownIcon />
-                DISLIKE
+                Dislike
               </Button>
               <Button className="gap-2">
                 <ShareIcon />
-                SHARE
+                Share
               </Button>
               <Button className="gap-2">
                 <ContentCutIcon />
-                CLIP
+                Clip
               </Button>
               <Button
                 className="gap-2"
@@ -76,7 +93,7 @@ export default function watch({ videoDesc }: any) {
                 }}
               >
                 <WatchLaterIcon />
-                WATCH LATER
+                Water Later
               </Button>
             </div>
           </div>
