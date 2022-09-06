@@ -4,6 +4,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import PersonIcon from "@mui/icons-material/Person";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import WatchLaterIcon from "@mui/icons-material/WatchLater";
 
 export default function SideNavigationBar() {
   const [user, setUser] = useState<any>();
@@ -57,6 +58,19 @@ export default function SideNavigationBar() {
         >
           <SettingsIcon />
           Edit Profile
+        </Button>
+      </Link>
+      <Link href={`/playlist`}>
+        <Button
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            color: "#fffcf2",
+            marginTop: "10px",
+          }}
+        >
+          <WatchLaterIcon />
+          Watch Later
         </Button>
       </Link>
     </div>

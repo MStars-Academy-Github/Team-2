@@ -34,6 +34,10 @@ const userSchema = new Schema<IUserDoc>({
     minlength: 10,
     maxlength: 10,
   },
+  playlist: {
+    type: [String],
+    trim: true,
+  },
 });
 
 userSchema.method(

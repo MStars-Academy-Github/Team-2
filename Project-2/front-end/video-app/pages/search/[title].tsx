@@ -7,7 +7,6 @@ import ReactPlayer from "react-player";
 
 export default function Title() {
   const [media, setMedia] = useState([]);
-  console.log(media);
   const router = useRouter();
   const { title } = router.query;
 
