@@ -116,7 +116,7 @@ export default function Main() {
                   onClick={() => handlerOpenVideo(video._id)}
                 />
 
-                <div className="text-white">
+                <div className="text-white ">
                   <div className="flex items-start p-2 gap-2">
                     <img src="/favicon.ico" alt="" width="40px" />
                     <div>
@@ -128,7 +128,6 @@ export default function Main() {
                     </div>
                   </div>
                 </div>
-                <div className="flex  text-white justify-around "></div>
               </div>
             );
           })}
