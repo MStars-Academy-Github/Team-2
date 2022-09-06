@@ -44,8 +44,8 @@ export default function watch({ videoDesc }: any) {
         <ReactPlayer
           url={`http://localhost:3001/v1/media/video/${video}`}
           controls={true}
-          height="70% "
-          width="fit-content"
+          width="60vw"
+          height="60vh"
         />
         <div>
           <p style={{ fontSize: "30px", color: "white" }}>
@@ -79,30 +79,6 @@ export default function watch({ videoDesc }: any) {
               </Button>
             </div>
           </div>
-          <Button
-            sx={{
-              color: "white",
-              border: "0.2px solid #006c6e",
-              width: "200px",
-              margin: "10px",
-            }}
-            variant="outlined"
-            onClick={handlerEditVideo}
-          >
-            Edit
-          </Button>
-          <Button
-            sx={{
-              color: "white",
-              border: "0.2px solid #006c6e",
-              width: "200px",
-              margin: "10px",
-            }}
-            variant="outlined"
-            onClick={() => handlerDlt(`${video}`)}
-          >
-            Delete
-          </Button>
         </div>
       </div>
       <div className="overflow-y-auto grid grid-cols-1 gap-5 h-[60vh]">
@@ -121,7 +97,7 @@ export default function watch({ videoDesc }: any) {
             <ReactPlayer
               url={`http://localhost:3001/v1/media/video/${video._id}`}
               controls={true}
-              width="100%"
+              width="20vw"
               height="fit-content"
               onClick={() => handlerOpenVideo(video._id)}
               key={i}
