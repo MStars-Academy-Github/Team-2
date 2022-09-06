@@ -7,6 +7,7 @@ export interface IUser {
   phone: number;
   password: string;
   register: string;
+  playlist: [string];
 }
 
 export interface IUserDoc extends IUser, Document {

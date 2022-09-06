@@ -23,7 +23,6 @@ export default function Main() {
   function handlerOpenVideo(id: any) {
     router.push(`/watch?video=${id}`);
   }
-  console.log(users);
 
   return (
     <>

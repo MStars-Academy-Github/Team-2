@@ -40,6 +40,13 @@ export default function watch({ videoDesc }: any) {
   React.useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("user") || "user"));
   }, []);
+  function playlistHandler(id: string) {
+    const user = JSON.parse(localStorage.getItem("user") || "user");
+    axios.post("http://localhost:3001/v1/users/playlist", {
+      userId: user.user._id,
+      mediaId: id,
+    });
+  }
 
   return (
     <div
@@ -79,7 +86,12 @@ export default function watch({ videoDesc }: any) {
                 <ContentCutIcon />
                 Clip
               </Button>
-              <Button className="gap-2">
+              <Button
+                className="gap-2"
+                onClick={() => {
+                  playlistHandler(watchVideo[0]._id);
+                }}
+              >
                 <WatchLaterIcon />
                 Water Later
               </Button>
