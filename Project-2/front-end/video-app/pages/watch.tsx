@@ -14,17 +14,6 @@ export default function watch({ videoDesc }: any) {
   const router = useRouter();
   const { video } = router.query;
 
-  function handlerDlt(id: any) {
-    axios.delete(`http://localhost:3001/v1/media/delete/${id}`).then((res) => {
-      if (res.status === 200) {
-        router.push("/");
-        alert("ustsan");
-      }
-    });
-  }
-  function handlerEditVideo() {
-    console.log("handlerEditVideo");
-  }
   const watchVideo = videoDesc.filter((videos: any) => {
     if (videos._id === video) {
       return videos;
