@@ -16,6 +16,8 @@ import { useRouter } from "next/router";
 import style from "../styles/header.module.css";
 import axios from "axios";
 import { FormControl, InputLabel, NativeSelect } from "@mui/material";
+import VideoCallIcon from "@mui/icons-material/VideoCall";
+import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 
 const genre = ["Music", "Animation", "Gaming", "Entertainment", "Comedy"];
 
@@ -30,19 +32,21 @@ const Navbar = () => {
     mediaId: "",
   });
   const [open, setOpen] = React.useState(false);
-
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
-
   const router = useRouter();
   const [user, setUser] = React.useState<any>();
-
+  const [like, setLike] = React.useState<any>();
+  console.log(like);
   React.useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("user") || "user"));
+  }, []);
+  React.useEffect(() => {
+    setLike(JSON.parse(localStorage.getItem("like") || "like"));
   }, []);
 
   function logoutHandler(e: any) {
@@ -146,13 +150,26 @@ const Navbar = () => {
                 border: "none",
               }}
               component="button"
+            >
+              {like === 0 ? (
+                <p></p>
+              ) : (
+                <p className="absolute bg-[red] rounded-full text-xs px-1">
+                  {like}
+                </p>
+              )}
+              <NotificationsActiveIcon />
+            </Box>
+            <Box
+              sx={{
+                background: "none",
+                border: "none",
+                padding: "0 20px 0 20px",
+              }}
+              component="button"
               onClick={handleOpenUpload}
             >
-              <img
-                src="upload.png"
-                alt=""
-                style={{ width: "50px", marginRight: "10px" }}
-              />
+              <VideoCallIcon />
             </Box>
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
