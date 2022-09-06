@@ -16,7 +16,6 @@ export default function watch({ videoDesc }: any) {
   const { video } = router.query;
 
   const [count, setCount] = useState(0);
-  console.log(count);
   const watchVideo = videoDesc.filter((videos: any) => {
     if (videos._id === video) {
       return videos;
@@ -34,7 +33,7 @@ export default function watch({ videoDesc }: any) {
       }
     });
   }
-  console.log(user);
+
   // console.log(video);
   // console.log(videoDesc);
   React.useEffect(() => {
@@ -51,7 +50,7 @@ export default function watch({ videoDesc }: any) {
   return (
     <div
       className="p-6 flex gap-4 justify-center "
-      style={{ backgroundColor: "#343a40", height: "100%" }}
+      style={{ backgroundColor: "#343a40", height: "88vh" }}
     >
       <div>
         <ReactPlayer
