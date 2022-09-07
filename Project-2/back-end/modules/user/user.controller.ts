@@ -39,6 +39,7 @@ export const updateUser = async (req: Request, res: Response) => {
 
 export const getUsers = async (req: Request, res: Response) => {
   try {
+    // const hashedPassword = await bcrypt.hash(password, 8);
     const user = await User.find();
     await res.status(200).json({ data: user });
   } catch (error) {
