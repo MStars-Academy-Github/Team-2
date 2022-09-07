@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import { Button, Divider, TextField } from "@mui/material";
 import moment from "moment";
@@ -24,6 +24,15 @@ import {
 import List from "@mui/material/List";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
+
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref
+) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 export interface SimpleDialogProps {
   open: boolean;
@@ -70,9 +79,24 @@ function SimpleDialog(props: SimpleDialogProps) {
 export default function watch({ videoDesc }: any) {
   const [open, setOpen] = React.useState(false);
   const [user, setUser] = React.useState<any>();
+  const [openAlert, setOpenAlert] = React.useState(false);
+  const [alertType, setAlertType] = React.useState<any>("success");
+  const [alertMessage, setAlertMessage] = React.useState<any>(
+    "Successfully added in Watch later playlist"
+  );
   const router = useRouter();
   const { video } = router.query;
-  const url = location.href;
+
+  const handleCloseAlert = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenAlert(false);
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -110,10 +134,20 @@ export default function watch({ videoDesc }: any) {
   }, []);
   function playlistHandler(id: string) {
     const user = JSON.parse(localStorage.getItem("user") || "user");
-    axios.post("http://localhost:3001/v1/users/playlist", {
-      userId: user.user._id,
-      mediaId: id,
-    });
+    axios
+      .post("http://localhost:3001/v1/users/playlist", {
+        userId: user.user._id,
+        mediaId: id,
+      })
+      .then((res) => {
+        if (res.data.data == "Already exist") {
+          setAlertType("info");
+          setAlertMessage("Already exist in Watch later playlist");
+          setOpenAlert(true);
+        } else {
+          setOpenAlert(true);
+        }
+      });
   }
 
   return (
@@ -198,6 +232,20 @@ export default function watch({ videoDesc }: any) {
           );
         })}
       </div>
+
+      <Snackbar
+        open={openAlert}
+        autoHideDuration={6000}
+        onClose={handleCloseAlert}
+      >
+        <Alert
+          onClose={handleCloseAlert}
+          severity={alertType}
+          sx={{ width: "100%" }}
+        >
+          {alertMessage}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }
