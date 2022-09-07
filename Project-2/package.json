@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "@types/formidable": "^2.0.5",
-    "formidable": "^2.0.1"
-  }
-}
