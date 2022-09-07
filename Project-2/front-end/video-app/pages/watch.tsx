@@ -26,6 +26,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import { style } from "@mui/system";
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -79,6 +80,9 @@ function SimpleDialog(props: SimpleDialogProps) {
 export default function watch({ videoDesc }: any) {
   const [open, setOpen] = React.useState(false);
   const [user, setUser] = React.useState<any>();
+  const [isActive, setIsActive] = useState(false);
+  const [isActive1, setIsActive1] = useState(false);
+  const [isActive2, setIsActive2] = useState(false);
   const [openAlert, setOpenAlert] = React.useState(false);
   const [alertType, setAlertType] = React.useState<any>("success");
   const [alertMessage, setAlertMessage] = React.useState<any>(
@@ -100,6 +104,7 @@ export default function watch({ videoDesc }: any) {
 
   const handleClickOpen = () => {
     setOpen(true);
+    setIsActive1((current) => !current);
   };
 
   const handleClose = (value: string) => {
@@ -120,6 +125,7 @@ export default function watch({ videoDesc }: any) {
     videoDesc.filter((a: any, i: number) => {
       if (a.postedBy === user?.user._id) {
         setCount(count + 1);
+        setIsActive((current) => !current);
         window.localStorage.setItem("like", JSON.stringify(count));
       }
     });
@@ -148,6 +154,7 @@ export default function watch({ videoDesc }: any) {
           setOpenAlert(true);
         }
       });
+    setIsActive2((current) => !current);
   }
 
   return (
@@ -174,7 +181,11 @@ export default function watch({ videoDesc }: any) {
               <p>{moment(watchVideo[0].created).format("MMM DD,YYYY")}</p>
             </div>
             <div className="flex">
-              <Button className="gap-2" onClick={handlerLike}>
+              <Button
+                className="gap-2"
+                onClick={handlerLike}
+                sx={{ color: isActive ? "red" : "" }}
+              >
                 <ThumbUpIcon /> Like
               </Button>
               <Button className="gap-2">
@@ -182,7 +193,10 @@ export default function watch({ videoDesc }: any) {
                 Dislike
               </Button>
               <div>
-                <Button onClick={handleClickOpen}>
+                <Button
+                  onClick={handleClickOpen}
+                  sx={{ color: isActive1 ? "red" : "" }}
+                >
                   <ShareIcon /> Share
                 </Button>
                 <SimpleDialog
@@ -200,6 +214,7 @@ export default function watch({ videoDesc }: any) {
                 onClick={() => {
                   playlistHandler(watchVideo[0]._id);
                 }}
+                sx={{ color: isActive2 ? "red" : "" }}
               >
                 <WatchLaterIcon />
                 Water Later
