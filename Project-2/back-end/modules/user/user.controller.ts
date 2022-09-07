@@ -84,3 +84,21 @@ export const addPlaylist = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const removePlaylist = async (req: Request, res: Response) => {
+  const { userId, mediaId } = req.body;
+  try {
+    const user = await User.findByIdAndUpdate(userId, {
+      $pull: {
+        playlist: mediaId,
+      },
+    });
+    res.status(200).json({
+      data: user,
+    });
+  } catch (error) {
+    return res.status(404).json({
+      error: error,
+    });
+  }
+};

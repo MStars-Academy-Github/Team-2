@@ -13,4 +13,6 @@ router.get("/", userController.getUsers);
 
 router.post("/playlist", userController.addPlaylist);
 
+router.post("/removeplaylist", userController.removePlaylist);
+
 export default router;
