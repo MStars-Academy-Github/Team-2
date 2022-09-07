@@ -41,7 +41,7 @@ const Navbar = () => {
   const router = useRouter();
   const [user, setUser] = React.useState<any>();
   const [like, setLike] = React.useState<any>();
-  console.log(like);
+
   React.useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("user") || "user"));
   }, []);
