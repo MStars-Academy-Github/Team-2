@@ -157,3 +157,16 @@ export const getMedia = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const viewCount = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  try {
+    const media = await Media.updateOne({ _id: id }, { $inc: { views: 1 } });
+    await res.status(200).json({ data: media });
+  } catch (error) {
+    return res.status(404).json({
+      error: "Colud not delete media",
+    });
+  }
+};
