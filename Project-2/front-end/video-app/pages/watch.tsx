@@ -80,11 +80,12 @@ function SimpleDialog(props: SimpleDialogProps) {
 export default function watch({ videoDesc }: any) {
   const [open, setOpen] = React.useState(false);
   const [user, setUser] = React.useState<any>();
-  const [isActive, setIsActive] = useState(false);
+
   const [isActive1, setIsActive1] = useState(false);
   const [isActive2, setIsActive2] = useState(false);
   const [isActive3, setIsActive3] = useState(false);
   const [isActive4, setIsActive4] = useState(false);
+  const [isActive, setIsActive] = useState(false);
   const [openAlert, setOpenAlert] = React.useState(false);
   const [alertType, setAlertType] = React.useState<any>("success");
   const [alertMessage, setAlertMessage] = React.useState<any>(
@@ -123,7 +124,7 @@ export default function watch({ videoDesc }: any) {
     router.push(`/watch?video=${id}`);
   }
   function handlerDislike() {
-    setIsActive3((current) => !current);
+    setIsActive((current) => !current);
   }
   function handleClickClip() {
     setIsActive4((current) => !current);
@@ -132,8 +133,8 @@ export default function watch({ videoDesc }: any) {
   function handlerLike() {
     videoDesc.filter((a: any, i: number) => {
       if (a.postedBy === user?.user._id) {
+        setIsActive3(true);
         setCount(count + 1);
-        setIsActive((current) => !current);
         window.localStorage.setItem("like", JSON.stringify(count));
       }
     });
@@ -192,14 +193,14 @@ export default function watch({ videoDesc }: any) {
               <Button
                 className="gap-2"
                 onClick={handlerLike}
-                sx={{ color: isActive ? "red" : "" }}
+                sx={{ color: isActive3 ? "red" : "" }}
               >
                 <ThumbUpIcon /> Like
               </Button>
               <Button
                 className="gap-2"
                 onClick={handlerDislike}
-                sx={{ color: isActive3 ? "red" : "" }}
+                sx={{ color: isActive ? "red" : "" }}
               >
                 <ThumbDownIcon />
                 Dislike
