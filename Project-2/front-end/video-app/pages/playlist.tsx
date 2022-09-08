@@ -16,16 +16,16 @@ export default function Playlist() {
   const router = useRouter();
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("user") || "user"));
-    axios.get("http://localhost:3001/v1/users").then((res) => {
+    axios.get("http://35.160.145.172:3001/v1/users").then((res) => {
       setUsers(res.data.data);
     });
-    axios.get("http://localhost:3001/v1/media").then((res) => {
+    axios.get("http://35.160.145.172:3001/v1/media").then((res) => {
       setMedia(res.data.data);
     });
   }, []);
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/v1/users/${user?.user._id}`)
+      .get(`http://35.160.145.172:3001/v1/users/${user?.user._id}`)
       .then((res) => {
         setPlaylist(res.data.data.playlist);
       });
@@ -37,7 +37,7 @@ export default function Playlist() {
 
   function removeFromPlaylist(id: any) {
     axios
-      .post("http://localhost:3001/v1/users/removeplaylist", {
+      .post("http://35.160.145.172:3001/v1/users/removeplaylist", {
         userId: user.user._id,
         mediaId: id,
       })
@@ -59,7 +59,7 @@ export default function Playlist() {
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
             <ReactPlayer
-              url={`http://localhost:3001/v1/media/video/${video}`}
+              url={`http://35.160.145.172:3001/v1/media/video/${video}`}
               controls={true}
               width="100%"
               height="25vh"

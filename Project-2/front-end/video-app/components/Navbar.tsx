@@ -42,14 +42,16 @@ const Navbar = () => {
   const [user, setUser] = React.useState<any>();
   const [like, setLike] = React.useState<any>();
 
-  React.useEffect(() => {
+  useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("user") || "user"));
+    setLike(JSON.parse(localStorage.getItem("like") || "like"));
   }, []);
-  if (localStorage.getItem("like")) {
-    React.useEffect(() => {
-      setLike(JSON.parse(localStorage.getItem("like") || "like"));
-    }, []);
-  }
+
+  // if (localStorage.getItem("like")) {
+  //   useEffect(() => {
+  //     setLike(JSON.parse(localStorage.getItem("like") || "like"));
+  //   }, [like]);
+  // }
 
   function logoutHandler(e: any) {
     e.preventDefault();
@@ -86,7 +88,7 @@ const Navbar = () => {
       formData.append("userId", user?.user._id);
       axios({
         method: "post",
-        url: `http://localhost:3001/v1/media/upload`,
+        url: `http://35.160.145.172:3001/v1/media/upload`,
         data: formData,
         headers: { "Content-Type": "multipart/form-data" },
       })

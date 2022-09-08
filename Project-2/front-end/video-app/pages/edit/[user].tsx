@@ -12,7 +12,7 @@ export default function User({ users }: any) {
   function handleUpdate(e: any) {
     e.preventDefault();
     axios
-      .post(`http://localhost:3001/v1/users/update/${user}`, {
+      .post(`http://35.160.145.172:3001/v1/users/update/${user}`, {
         email: e.target.email.value,
         firstName: e.target.firstname.value,
         lastName: e.target.lastname.value,

@@ -13,7 +13,7 @@ export default function Title() {
   const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/v1/media/search/by/${title}`)
+      .get(`http://35.160.145.172:3001/v1/media/search/by/${title}`)
       .then((res) => {
         setMedia(res.data.data);
       })
@@ -35,7 +35,7 @@ export default function Title() {
             media.map((video: any, i: number) => (
               <ReactPlayer
                 key={i}
-                url={`http://localhost:3001/v1/media/video/${video._id}`}
+                url={`http://35.160.145.172:3001/v1/media/video/${video._id}`}
                 width="100%"
                 height={"inherit"}
                 controls={true}

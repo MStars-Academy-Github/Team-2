@@ -48,28 +48,35 @@ export default function Id({ mediaa }: any) {
 
   const handleClose = () => setOpen(false);
   useEffect(() => {
-    axios.get(`http://localhost:3001/v1/media/video/by/${id}`).then((res) => {
-      setMedia(res.data.data);
-    });
+    axios
+      .get(`http://35.160.145.172:3001/v1/media/video/by/${id}`)
+      .then((res) => {
+        setMedia(res.data.data);
+      });
   }, [id]);
 
   function handlerDlt(id: any) {
-    axios.delete(`http://localhost:3001/v1/media/delete/${id}`).then((res) => {
-      if (res.status === 200) {
-        router.push("/");
-        alert("ustsan");
-      }
-    });
+    axios
+      .delete(`http://35.160.145.172:3001/v1/media/delete/${id}`)
+      .then((res) => {
+        if (res.status === 200) {
+          router.push("/");
+          alert("ustsan");
+        }
+      });
   }
 
   function editVideoDesc(e: any) {
     e.preventDefault();
     axios
-      .put(`http://localhost:3001/v1/media/update/${mediaEdit && mediaEdit}`, {
-        title: e.target.title.value,
-        description: e.target.description.value,
-        genre: e.target.genre.value,
-      })
+      .put(
+        `http://35.160.145.172:3001/v1/media/update/${mediaEdit && mediaEdit}`,
+        {
+          title: e.target.title.value,
+          description: e.target.description.value,
+          genre: e.target.genre.value,
+        }
+      )
       .then((res) => {
         if (res.status === 200) {
           alert("Update hiigdlee");
@@ -107,7 +114,7 @@ export default function Id({ mediaa }: any) {
             <div>
               <ReactPlayer
                 key={i}
-                url={`http://localhost:3001/v1/media/video/${video._id}`}
+                url={`http://35.160.145.172:3001/v1/media/video/${video._id}`}
                 controls={true}
                 width="100%"
                 height="25vh"
@@ -230,7 +237,7 @@ export default function Id({ mediaa }: any) {
 }
 
 Id.getInitialProps = async (ctx: any) => {
-  const res = await axios.get("http://localhost:3001/v1/media");
+  const res = await axios.get("http://35.160.145.172:3001/v1/media");
   const json = await res.data.data;
   return { mediaa: json };
 };
