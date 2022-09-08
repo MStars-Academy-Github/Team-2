@@ -68,7 +68,10 @@ export default function Playlist() {
                         return users.map((user: any, i: number) => {
                           if (user._id === videoInfo.postedBy) {
                             return (
-                              <div className="flex justify-between items-center w-full">
+                              <div
+                                className="flex justify-between items-center w-full"
+                                key={i}
+                              >
                                 <div className="flex gap-3" key={i}>
                                   <Avatar
                                     alt="Remy Sharp"
