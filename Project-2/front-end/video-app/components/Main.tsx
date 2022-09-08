@@ -130,10 +130,10 @@ export default function Main() {
                 <div className="text-white ">
                   <div className="flex items-start p-2 gap-2">
                     <div>
-                      {users.map((user: any) => {
+                      {users.map((user: any, i: number) => {
                         if (user._id === video.postedBy) {
                           return (
-                            <div className="flex gap-3">
+                            <div className="flex gap-3" key={i}>
                               <Avatar
                                 alt="Remy Sharp"
                                 style={{
