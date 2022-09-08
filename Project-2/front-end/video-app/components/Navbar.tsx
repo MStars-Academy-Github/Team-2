@@ -199,7 +199,7 @@ const Navbar = () => {
                 open={Boolean(anchorElUser)}
               >
                 <MenuItem onClick={logoutHandler}>
-                  <Typography textAlign="center">Sing out</Typography>
+                  <Typography textAlign="center">Sing in</Typography>
                 </MenuItem>
               </Menu>
             </Box>
