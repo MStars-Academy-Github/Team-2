@@ -48,6 +48,7 @@ export const createMedia = async (req: Request, res: Response) => {
 };
 export const getMediaById = async (req: Request, res: Response) => {
   const { mediaId } = req.params;
+  const range = req.headers["range"];
   try {
     const media = await Media.findById(mediaId)
       .populate("postedBy", "_id firstName lastName")
@@ -58,20 +59,47 @@ export const getMediaById = async (req: Request, res: Response) => {
         filename: media?._id.toString(),
       })
       .toArray();
-
     let file = files[0];
 
-    res.header("Content-Length", file.length.toString());
-    res.header("Content-Type", file.contentType);
+    if (range && typeof range === "string") {
+      const parts = range.replace(/bytes/, "").split("-");
+      const partialStart = parts[0];
+      const partialEnd = parts[1];
+      const start = parseInt(partialStart, 10);
+      const end = partialEnd ? parseInt(partialEnd, 10) : file.length - 1;
+      const chunkSize = end - start + 1;
+      res.writeHead(206, {
+        "Accept-Ranges": "bytes",
+        "Content-Lenght": chunkSize.toString(),
+        "Content-Range": "bytes " + start + "-" + end + "/" + file.length,
+        "Content-Type": file.contentType,
+      });
 
-    let downloadStream = gridfs.openDownloadStream(file._id);
-    downloadStream.pipe(res);
-    downloadStream.on("error", () => {
-      res.sendStatus(404);
-    });
-    downloadStream.on("end", () => {
-      res.end();
-    });
+      let downloadStream = gridfs.openDownloadStream(file._id, {
+        start,
+        end: end + 1,
+      });
+      downloadStream.pipe(res);
+      downloadStream.on("error", () => {
+        res.sendStatus(404);
+      });
+      downloadStream.on("end", () => {
+        res.end();
+      });
+    } else {
+      //Whole chunk of videos
+      res.header("Content-Length", file.length.toString());
+      res.header("Content-Type", file.contentType);
+
+      let downloadStream = gridfs.openDownloadStream(file._id);
+      downloadStream.pipe(res);
+      downloadStream.on("error", () => {
+        res.sendStatus(404);
+      });
+      downloadStream.on("end", () => {
+        res.end();
+      });
+    }
   } catch (error) {
     return res.status(404).json({
       error: "Colud not retrieve media file",
