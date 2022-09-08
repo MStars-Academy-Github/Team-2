@@ -3,6 +3,7 @@ import React, { useRef } from "react";
 import { useRouter } from "next/router";
 import { Box, Button, TextField } from "@mui/material";
 import styles from "../../styles/login.module.css";
+import { motion } from "framer-motion";
 
 export default function User({ users }: any) {
   const router = useRouter();
@@ -32,7 +33,12 @@ export default function User({ users }: any) {
   }
 
   return (
-    <div>
+    <motion.div
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: -10, opacity: 0 }}
+      transition={{ duration: 0.4 }}
+    >
       {users.map((user1: any, i: number) => {
         if (user1._id === user) {
           return (
@@ -154,7 +160,7 @@ export default function User({ users }: any) {
           );
         }
       })}
-    </div>
+    </motion.div>
   );
 }
 

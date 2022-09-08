@@ -175,7 +175,7 @@ export default function watch({ videoDesc }: any) {
         <ReactPlayer
           url={`http://localhost:3001/v1/media/video/${video}`}
           controls={true}
-          width="60vw"
+          width="100%"
           height="60vh"
           onEnded={viewCounter}
         />
