@@ -117,7 +117,7 @@ export default function Main() {
                   url={`http://localhost:3001/v1/media/video/${video._id}`}
                   controls={true}
                   width="100%"
-                  height="25vh"
+                  height="26vh"
                   onClick={() => handlerOpenVideo(video._id)}
                 />
 
