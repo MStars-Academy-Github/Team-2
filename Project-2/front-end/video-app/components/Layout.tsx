@@ -27,8 +27,6 @@ export default function Layout({ children }: PropsWithChildren) {
         <SideNavigationBar />
         <main style={{ width: "100%" }}>{children}</main>
       </div>
-
-      <Footbar />
     </div>
   );
 }
