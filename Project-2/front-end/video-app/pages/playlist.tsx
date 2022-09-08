@@ -55,7 +55,7 @@ export default function Playlist() {
             <ReactPlayer
               url={`http://localhost:3001/v1/media/video/${video}`}
               controls={true}
-              width="20vw"
+              width="100%"
               height="20vh"
               onClick={() => handlerOpenVideo(video)}
             />
