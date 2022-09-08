@@ -77,7 +77,7 @@ function SimpleDialog(props: SimpleDialogProps) {
     </Dialog>
   );
 }
-export default function watch({ videoDesc }: any) {
+export default function Watch({ videoDesc }: any) {
   const [open, setOpen] = React.useState(false);
   const [user, setUser] = React.useState<any>();
 
@@ -141,7 +141,7 @@ export default function watch({ videoDesc }: any) {
   }
 
   function viewCounter() {
-    axios.post(`http://localhost:3001/v1/media/view/${video}`);
+    axios.post(`http://35.160.145.172:3001/v1/media/view/${video}`);
   }
 
   React.useEffect(() => {
@@ -150,7 +150,7 @@ export default function watch({ videoDesc }: any) {
   function playlistHandler(id: string) {
     const user = JSON.parse(localStorage.getItem("user") || "user");
     axios
-      .post("http://localhost:3001/v1/users/playlist", {
+      .post("http://35.160.145.172:3001/v1/users/playlist", {
         userId: user.user._id,
         mediaId: id,
       })
@@ -173,7 +173,7 @@ export default function watch({ videoDesc }: any) {
     >
       <div>
         <ReactPlayer
-          url={`http://localhost:3001/v1/media/video/${video}`}
+          url={`http://35.160.145.172:3001/v1/media/video/${video}`}
           controls={true}
           width="100%"
           height="60vh"
@@ -254,7 +254,7 @@ export default function watch({ videoDesc }: any) {
         {videoDesc.map((video: any, i: number) => {
           return (
             <ReactPlayer
-              url={`http://localhost:3001/v1/media/video/${video._id}`}
+              url={`http://35.160.145.172:3001/v1/media/video/${video._id}`}
               controls={true}
               width="20vw"
               height="fit-content"
@@ -282,8 +282,8 @@ export default function watch({ videoDesc }: any) {
   );
 }
 
-watch.getInitialProps = async (ctx: any) => {
-  const res = await axios.get("http://localhost:3001/v1/media");
+Watch.getInitialProps = async (ctx: any) => {
+  const res = await axios.get("http://35.160.145.172:3001/v1/media");
   const json = await res.data.data;
   return { videoDesc: json };
 };

@@ -12,10 +12,10 @@ export default function Main() {
   const [media, setMedia] = useState<any>([]);
   const [users, setUsers] = useState<any>([]);
   useEffect(() => {
-    axios.get("http://localhost:3001/v1/media").then((res) => {
+    axios.get("http://35.160.145.172:3001/v1/media").then((res) => {
       setMedia(res.data.data);
     });
-    axios.get("http://localhost:3001/v1/users").then((res) => {
+    axios.get("http://35.160.145.172:3001/v1/users").then((res) => {
       setUsers(res.data.data);
     });
   }, []);
@@ -31,7 +31,7 @@ export default function Main() {
           variant="outlined"
           sx={{ color: "white", border: "0.2px solid #006c6e" }}
           onClick={() => {
-            axios.get("http://localhost:3001/v1/media").then((res) => {
+            axios.get("http://35.160.145.172:3001/v1/media").then((res) => {
               setMedia(res.data.data);
             });
           }}
@@ -42,9 +42,11 @@ export default function Main() {
           variant="outlined"
           sx={{ color: "white", border: "0.2px solid #006c6e" }}
           onClick={() => {
-            axios.get("http://localhost:3001/v1/media/by/music").then((res) => {
-              setMedia(res.data.data);
-            });
+            axios
+              .get("http://35.160.145.172:3001/v1/media/by/music")
+              .then((res) => {
+                setMedia(res.data.data);
+              });
           }}
         >
           Music
@@ -54,7 +56,7 @@ export default function Main() {
           sx={{ color: "white", border: "0.2px solid #006c6e" }}
           onClick={() => {
             axios
-              .get("http://localhost:3001/v1/media/by/animation")
+              .get("http://35.160.145.172:3001/v1/media/by/animation")
               .then((res) => {
                 setMedia(res.data.data);
               });
@@ -67,7 +69,7 @@ export default function Main() {
           sx={{ color: "white", border: "0.2px solid #006c6e" }}
           onClick={() => {
             axios
-              .get("http://localhost:3001/v1/media/by/gaming")
+              .get("http://35.160.145.172:3001/v1/media/by/gaming")
               .then((res) => {
                 setMedia(res.data.data);
               });
@@ -80,7 +82,7 @@ export default function Main() {
           sx={{ color: "white", border: "0.2px solid #006c6e" }}
           onClick={() => {
             axios
-              .get("http://localhost:3001/v1/media/by/entertainment")
+              .get("http://35.160.145.172:3001/v1/media/by/entertainment")
               .then((res) => {
                 setMedia(res.data.data);
               });
@@ -93,7 +95,7 @@ export default function Main() {
           sx={{ color: "white", border: "0.2px solid #006c6e" }}
           onClick={() => {
             axios
-              .get("http://localhost:3001/v1/media/by/comedy")
+              .get("http://35.160.145.172:3001/v1/media/by/comedy")
               .then((res) => {
                 setMedia(res.data.data);
               });
@@ -114,7 +116,7 @@ export default function Main() {
             return (
               <div key={i}>
                 <ReactPlayer
-                  url={`http://localhost:3001/v1/media/video/${video._id}`}
+                  url={`http://35.160.145.172:3001/v1/media/video/${video._id}`}
                   controls={true}
                   width="100%"
                   height="25vh"
