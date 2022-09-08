@@ -8,6 +8,7 @@ import {
   TextField,
 } from "@mui/material";
 import axios from "axios";
+import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -93,18 +94,23 @@ export default function Id({ mediaa }: any) {
         color: "white",
         backgroundColor: "#343a40",
       }}
-      className="grid grid-cols-4 gap-4"
+      className="grid grid-cols-4 gap-7"
     >
       {media.map((video: any, i: number) => {
         return (
-          <div key={i}>
+          <motion.div
+            key={i}
+            className="box"
+            whileHover={{ scale: 1.1 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
             <div>
               <ReactPlayer
                 key={i}
                 url={`http://localhost:3001/v1/media/video/${video._id}`}
                 controls={true}
                 width="100%"
-                height="fit-content"
+                height="25vh"
                 onClick={() => handlerOpenVideo(video._id)}
               />
 
@@ -136,7 +142,7 @@ export default function Id({ mediaa }: any) {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         );
       })}
       <div>

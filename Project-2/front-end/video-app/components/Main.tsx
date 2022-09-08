@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import moment from "moment";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { motion } from "framer-motion";
 
 const genre = ["Music", "Animation", "Gaming", "Entertainment", "Comedy"];
 export default function Main() {
@@ -109,10 +110,15 @@ export default function Main() {
           padding: "30px",
         }}
       >
-        <div className="grid grid-cols-4 gap-5">
+        <div className="grid grid-cols-4 gap-7">
           {media.map((video: any, i: number) => {
             return (
-              <div key={i}>
+              <motion.div
+                key={i}
+                className="box"
+                whileHover={{ scale: 1.1 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
                 <ReactPlayer
                   url={`http://localhost:3001/v1/media/video/${video._id}`}
                   controls={true}
@@ -168,7 +174,7 @@ export default function Main() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>
