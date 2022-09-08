@@ -62,7 +62,7 @@ export const getMediaById = async (req: Request, res: Response) => {
     let file = files[0];
 
     if (range && typeof range === "string") {
-      const parts = range.replace(/bytes/, "").split("-");
+      const parts = range.replace(/bytes=/, "").split("-");
       const partialStart = parts[0];
       const partialEnd = parts[1];
       const start = parseInt(partialStart, 10);
@@ -70,7 +70,7 @@ export const getMediaById = async (req: Request, res: Response) => {
       const chunkSize = end - start + 1;
       res.writeHead(206, {
         "Accept-Ranges": "bytes",
-        "Content-Lenght": chunkSize.toString(),
+        "Content-Length": chunkSize.toString(),
         "Content-Range": "bytes " + start + "-" + end + "/" + file.length,
         "Content-Type": file.contentType,
       });
