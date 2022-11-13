@@ -46,7 +46,7 @@ export default function Login({}: Props) {
   function loginHandler(e: any) {
     e.preventDefault();
     axios
-      .post("http://54.190.80.76:3001/users/login", {
+      .post("http://localhost:3001/users/login", {
         email: e.target.email.value,
         password: e.target.password.value,
       })
@@ -70,7 +70,7 @@ export default function Login({}: Props) {
     e.preventDefault();
     if (e.target.password.value === e.target.passwordAgain.value) {
       axios
-        .post("http://54.190.80.76:3001/users/register", {
+        .post("http://localhost:3001/users/register", {
           email: e.target.email.value,
           password: e.target.password.value,
           firstName: e.target.firstName.value,
@@ -98,7 +98,7 @@ export default function Login({}: Props) {
   function forgetPassHandler(e: any) {
     e.preventDefault();
     axios
-      .post("http://54.190.80.76:3001/users/forgetPass", {
+      .post("http://localhost:3001/users/forgetPass", {
         email: e.target.email.value,
       })
       .then((res) => {

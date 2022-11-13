@@ -45,7 +45,7 @@ export default function Menu({ user }: any) {
           icon={<ClearIcon />}
           onClick={() => {
             axios.delete(
-              `http://54.190.80.76:3001/users/delete?id=${loggedUser.data.user._id}&userLike=${user._id}`
+              `http://localhost:3001/users/delete?id=${loggedUser.data.user._id}&userLike=${user._id}`
             );
             window.location.reload();
           }}

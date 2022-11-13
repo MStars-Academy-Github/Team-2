@@ -23,7 +23,7 @@ export default function Myprofile() {
     e.preventDefault();
 
     axios
-      .put(`http://54.190.80.76:3001/users/${user?.data.user._id}`, {
+      .put(`http://localhost:3001/users/${user?.data.user._id}`, {
         email: e.target.email.value,
         password: e.target.password.value,
         firstName: e.target.firstName.value,
